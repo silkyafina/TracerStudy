@@ -1,0 +1,548 @@
+/* public/css/alumni-dashboard.css */
+
+/* ================= GENERAL ================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* ================= NAVBAR DASHBOARD ================= */
+.navbar-dashboard {
+    background: linear-gradient(135deg, #5a0f1b 0%, #7a1b28 100%);
+    box-shadow: 0 2px 20px rgba(90, 15, 27, 0.3);
+    padding: 12px 0;
+}
+.navbar-toggler{
+    color: #ffffff !important;
+}
+
+.logo-small {
+    height: 40px;
+    transition: transform 0.3s ease;
+}
+
+.logo-small:hover {
+    transform: scale(1.05);
+}
+
+.brand-title-small {
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 16px;
+    letter-spacing: -0.5px;
+}
+
+.brand-subtitle-small {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+}
+
+.nav-link-dashboard {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-weight: 500;
+    padding: 8px 16px !important;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.nav-link-dashboard:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffffff !important;
+}
+
+.nav-link-dashboard.active {
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff !important;
+}
+
+.navbar-dashboard .dropdown-menu {
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    padding: 8px 0;
+    margin-top: 8px;
+}
+
+.navbar-dashboard .dropdown-item {
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+}
+
+.navbar-dashboard .dropdown-item:hover {
+    background-color: #5a0f1b !important;
+    color: #fff !important;
+}
+
+/* ================= MAIN CONTENT ================= */
+.main-content {
+    flex: 1;
+    margin-top: 80px;
+    padding: 30px 0;
+}
+
+/* ================= CARDS ================= */
+.card {
+    overflow: visible;
+}
+.card-custom {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 2px 15px rgba(90, 15, 27, 0.08);
+    transition: all 0.3s ease;
+    background: #ffffff;
+}
+
+.card-custom:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(90, 15, 27, 0.15);
+}
+
+.card-header-custom {
+    background: linear-gradient(135deg, #5a0f1b 0%, #7a1b28 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: 12px 12px 0 0 !important;
+    padding: 20px;
+    font-weight: 600;
+}
+
+/* ================= PROGRESS BAR ================= */
+.progress-custom {
+    height: 25px;
+    border-radius: 12px;
+    background: #e9ecef;
+    overflow: hidden;
+}
+
+.progress-bar-custom {
+    background: linear-gradient(135deg, #5a0f1b 0%, #7a1b28 100%);
+    transition: width 0.6s ease;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+/* ================= STATS CARD ================= */
+.stat-card {
+    padding: 25px;
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0 2px 15px rgba(90, 15, 27, 0.08);
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(90, 15, 27, 0.15);
+}
+
+.stat-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.stat-icon.success {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: #ffffff;
+}
+
+.stat-icon.warning {
+    background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%);
+    color: #ffffff;
+}
+
+.stat-icon.primary {
+    background: linear-gradient(135deg, #5a0f1b 0%, #7a1b28 100%);
+    color: #ffffff;
+}
+
+.stat-value {
+    font-size: 32px;
+    font-weight: 700;
+    color: #5a0f1b;
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    font-size: 14px;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+/* ================= BUTTONS ================= */
+.btn-maroon {
+    background: linear-gradient(135deg, #5a0f1b 0%, #7a1b28 100%);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(90, 15, 27, 0.3);
+    width: auto !important;
+   
+}
+
+.btn-maroon:hover {
+    background: linear-gradient(135deg, #7a1b28 0%, #5a0f1b 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(90, 15, 27, 0.4);
+    color: #fff;
+}
+
+.btn-outline-maroon {
+    border: 2px solid #5a0f1b;
+    color: #5a0f1b;
+    background: transparent;
+    padding: 10px 24px;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-maroon:hover {
+    background: #5a0f1b;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(90, 15, 27, 0.3);
+}
+
+/* ================= TABLE ================= */
+.table-custom {
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.table-custom thead {
+    background: linear-gradient(135deg, #5a0f1b 0%, #7a1b28 100%);
+    color: #ffffff;
+}
+
+.table-custom thead th {
+    border: none;
+    padding: 15px;
+    font-weight: 600;
+}
+
+.table-custom tbody td {
+    padding: 15px;
+    vertical-align: middle;
+}
+
+.table-custom tbody tr {
+    transition: all 0.3s ease;
+}
+
+.table-custom tbody tr:hover {
+    background: rgba(90, 15, 27, 0.05);
+}
+.table-likert {
+    min-width: 700px;
+}
+
+.table-likert th,
+.table-likert td {
+    white-space: nowrap;
+}
+/* ================= BADGE ================= */
+.badge-success-custom {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: #ffffff;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+.badge-warning-custom {
+    background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%);
+    color: #ffffff;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+.badge-danger-custom {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    color: #ffffff;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+/* ================= FORM ================= */
+.form-control-custom {
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    padding: 12px 16px;
+    transition: all 0.3s ease;
+}
+
+.form-control-custom:focus {
+    border-color: #5a0f1b;
+    box-shadow: 0 0 0 0.2rem rgba(90, 15, 27, 0.15);
+}
+
+.form-label-custom {
+    font-weight: 600;
+    color: #2b2b2b;
+    margin-bottom: 8px;
+}
+
+/* ================= FOOTER ================= */
+.footer-section {
+    background: linear-gradient(135deg, #5a0f1b 0%, #3d0a12 100%);
+    color: #ffffff;
+    padding: 40px 0 20px;
+    margin-top: 0;
+}
+
+.footer-section strong {
+    font-size: 16px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.footer-section p {
+    font-size: 14px;
+    line-height: 2;
+}
+
+.footer-section a {
+    color: rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.footer-section a:hover {
+    color: #ffffff;
+    transform: translateX(3px);
+    display: inline-block;
+}
+
+.social-media {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.social-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.social-icon:hover {
+    background: #ffffff;
+    color: #5a0f1b;
+    transform: translateY(-3px);
+}
+
+.footer-section hr {
+    border-color: rgba(255, 255, 255, 0.2);
+}
+.hover-lift {
+    transition: all 0.3s ease;
+    border: 2px solid #e9ecef !important;
+}
+
+.hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(90, 15, 27, 0.15);
+    border-color: #5a0f1b !important;
+}
+
+/* radio maroon */
+.form-check-input:checked {
+    background-color: #800000;
+    border-color: #800000;
+}
+
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.15rem rgba(128,0,0,.25);
+}
+table input[type="radio"] {
+    transform: scale(1.2);
+    cursor: pointer;
+}
+.radio-red:checked {
+    background-color: #5a0f1b;
+    border-color: #5a0f1b;
+}
+.radio-red {
+    cursor: pointer;
+}
+.checkbox-red:checked {
+    background-color: #800000;
+    border-color: #800000;
+}
+.bg-maroon {
+    background: linear-gradient(135deg, #5a0f1b 0%, #3d0a12 100%);
+    color: #ffffff; /* memastikan teks tetap putih */
+}
+
+/* ===== HISTORY TABLE ===== */
+
+.history-wrapper {
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 4px 18px rgba(0,0,0,.06);
+    overflow: hidden;
+}
+
+.history-table thead {
+    background: #f8f9fa;
+}
+
+.history-table th {
+    color: #495057;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 16px 20px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.history-table td {
+    padding: 16px 20px;
+    font-size: 14px;
+    color: #2b2b2b;
+}
+
+.history-table tbody tr:hover {
+    background: #fcfcfc;
+}
+
+/* badge status */
+.status-complete {
+    background: #e8f7ee;
+    color: #198754;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* tombol detail */
+.btn-history-detail {
+    border: 1px solid #5a0f1b;
+    color: #5a0f1b;
+    text-decoration: none;
+    padding: 7px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: .2s ease;
+}
+
+.btn-history-detail:hover {
+    background: #5a0f1b;
+    color: white;
+}
+
+/* mobile */
+@media (max-width: 768px) {
+
+    .history-table th,
+    .history-table td {
+        padding: 12px;
+        font-size: 12px;
+    }
+
+    .btn-history-detail {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+
+}
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+    .main-content {
+        margin-top: 70px;
+        padding: 20px 0;
+    }
+    .login-left,
+    .login-right {
+        width: 100%;
+    }
+
+    .login-left {
+        padding: 20px;
+    }
+
+    .login-right {
+        padding: 20px;
+    }
+
+    .login-left .logo {
+        width: 120px;
+    }
+    .stat-card {
+        margin-bottom: 20px;
+    }
+
+    .card-custom {
+        margin-bottom: 20px;
+    }
+    .btn-maroon {
+        padding: 10px 16px;
+        font-size: 13px;
+        width: auto; /* penting: jangan full lebar */
+    }
+    .d-flex.gap-2 {
+        flex-direction: row;
+    }
+
+    .d-flex.gap-2 .btn {
+        flex: 1; /* biar rata, tapi gak oversized */
+    }
+    .table-likert {
+        font-size: 12px;
+    }
+    body {
+        background: #eee;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    
+
+    button {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .table-likert small {
+        display: none; /* sembunyikan label panjang */
+    }
+    
+}

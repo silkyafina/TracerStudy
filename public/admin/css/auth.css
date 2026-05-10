@@ -1,0 +1,144 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+
+}
+
+body {
+    background-color: #f4f6f9;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 900px;
+    min-height: 520px;
+    display: flex;
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,.15);
+}
+
+/* KIRI */
+.login-left {
+    width: 45%;
+    background: #7a1f2b;
+    color: #f6efe9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-left .logo {
+    width: clamp(120px, 20vw, 250px);
+    align-items: center;
+}
+
+.login-left h2 {
+    font-size: 22px;
+    text-align: center;
+    color: antiquewhite;
+}
+
+/* KANAN */
+.login-right {
+    width: 55%;
+    background: #f6efe9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-box {
+    width: 80%;
+    max-width: 350px;
+}
+
+.form-box .icon {
+    width: 60px;
+    margin-bottom: 10px;
+}
+
+.form-box h2 {
+    color: #7a1f2b;
+}
+
+.subtitle {
+    color: #555;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    color: #4a4a4a;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #c9a3a8;
+    outline: none;
+    font-size: 14px;
+}
+
+input:focus {
+    border-color: #7a1f2b;
+}
+
+button {
+    width: 100%;
+    margin-top: 25px;
+    padding: 12px;
+    border: none;
+    border-radius: 12px;
+    background: #7a1f2b;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #651924;
+}
+.icon-toga {
+    color: #7a1f2b;
+    margin-bottom: 12px;
+    background: #fdf7f2;
+    padding: 18px;
+    border-radius: 50%;
+}
+@media (max-width: 768px) {
+    .login-container {
+        flex-direction: column;
+        border-radius: 16px;
+    }
+
+    .login-left {
+        width: 100%;
+        padding: 30px 20px;
+    }
+
+    .login-left .logo {
+        width: 120px;
+    }
+
+    .login-right {
+        width: 100%;
+        padding: 30px 20px;
+    }
+
+    .form-box {
+        width: 100%;
+    }
+}
