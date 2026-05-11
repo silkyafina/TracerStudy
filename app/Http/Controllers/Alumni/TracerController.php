@@ -3,14 +3,12 @@
 namespace App\Http\Controllers\Alumni;
 
 use App\Http\Controllers\Controller;
-use App\Models\Provinsi;
 use App\Models\TracerAnswer;
 use App\Models\TracerSection;
 use App\Models\TracerSession;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use App\Models\UserSurvey;
 use App\Mail\SurveyPenggunaMail;
@@ -223,9 +221,7 @@ class TracerController extends Controller
 
     public function section3()
     {
-        return $this->renderSection(3, [
-            'provinsi' => Provinsi::orderBy('nama')->get()
-        ]);
+        return $this->renderSection(3);
     }
 
     public function storeSection3(Request $request)
