@@ -197,7 +197,7 @@ Route::middleware('alumni')->group(function () {
 Route::get('/test-mail', function () {
 
     Mail::raw('Email test dari Tracer Study berhasil dikirim.', function ($message) {
-        $message->to('emailkamu@gmail.com')
+        $message->to('aafnsly@gmail.com')
                 ->subject('Test Email');
     });
 
