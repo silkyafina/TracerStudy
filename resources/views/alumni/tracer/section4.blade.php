@@ -30,10 +30,10 @@
                     <input class="form-check-input radio-red"
                            type="radio"
                            name="answers[{{ $q->id }}]"
-                           value="{{ $opt->value }}"
+                           value="{{ $opt->id }}"
                            required>
                     <label class="form-check-label">
-                        {{ $opt->id }} - {{ $opt->value }}
+                        {{ $opt->value }} - {{ $opt->label }}
                     </label>
                 </div>
                 @endforeach
