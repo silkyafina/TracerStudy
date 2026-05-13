@@ -17,9 +17,9 @@ class TracerAnswer extends Model
     {
         return $this->belongsTo(TracerQuestion::class, 'tracer_question_id');
     }
-    public function option()
+    public function selectedOption()
     {
-        return $this->belongsTo(TracerOption::class, 'tracer_option_id');
+        return $this->belongsTo(TracerOption::class, 'value');
     }
 
     public function item()

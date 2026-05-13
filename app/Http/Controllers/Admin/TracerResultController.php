@@ -79,7 +79,8 @@ class TracerResultController extends Controller
         $sessions = \App\Models\TracerSession::with([
                 'answers.question.section',
                 'answers.question.options',
-                'answers.question.items'
+                'answers.question.items',
+                'answers.selectedOption'
             ])
             ->where('alumni_id', $alumniId)
             ->orderByDesc('created_at')

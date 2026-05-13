@@ -176,9 +176,11 @@ class TracerImport implements ToCollection, WithHeadingRow
                 foreach ($items as $label => $no) {
             
                     if (str_contains($col, $label) && $value == 1) {
-                        $option = $options[$qid][$no - 1] ?? null;
+                        $option = TracerOption::where('tracer_question_id', $qid)
+                        ->where('label', $label)
+                        ->first();
                         if ($option) {
-                            $checkboxData[$qid][] = $option->value;
+                            $checkboxData[$qid][] = $option->id;
                         }
                     }
                 }
@@ -186,10 +188,26 @@ class TracerImport implements ToCollection, WithHeadingRow
             // 🔥 HANDLE NON MATRIX
             if (isset($map[$col])) {
 
+                $qid = $map[$col];
+                $finalValue = (string) $value;
+                
+                // cek apakah question punya options
+                $option = TracerOption::where('tracer_question_id', $qid)
+                    ->where(function ($q) use ($value) {
+                        $q->where('label', $value)
+                          ->orWhere('value', $value);
+                    })
+                    ->first();
+                
+                // kalau ketemu option → simpan ID
+                if ($option) {
+                    $finalValue = $option->id;
+                }
+                
                 TracerAnswer::create([
                     'tracer_session_id'  => $session->id,
-                    'tracer_question_id' => $map[$col],
-                    'value'              => (string)$value,
+                    'tracer_question_id' => $qid,
+                    'value'              => (string) $finalValue,
                 ]);
             }
         }

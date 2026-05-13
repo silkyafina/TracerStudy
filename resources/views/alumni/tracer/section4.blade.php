@@ -33,7 +33,7 @@
                            value="{{ $opt->value }}"
                            required>
                     <label class="form-check-label">
-                        {{ $opt->value }} - {{ $opt->label }}
+                        {{ $opt->id }} - {{ $opt->value }}
                     </label>
                 </div>
                 @endforeach
