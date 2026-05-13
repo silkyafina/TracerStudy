@@ -17,6 +17,7 @@ use App\Http\Controllers\Alumni\TracerController;
 use App\Http\Controllers\Auth\AlumniAuthController;
 use App\Http\Controllers\SurveyPenggunaController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Mail;
 
 Route::get('/', function () {
     return view('front.home');
@@ -191,4 +192,14 @@ Route::middleware('alumni')->group(function () {
     Route::get('/survey/pengguna/{token}', [SurveyPenggunaController::class, 'show'])->name('survey.pengguna.show');
     Route::post('/survey/pengguna/{token}', [SurveyPenggunaController::class, 'store'])->name('survey.pengguna.store');
 
-        
+    
+
+Route::get('/test-mail', function () {
+
+    Mail::raw('Email test dari Tracer Study berhasil dikirim.', function ($message) {
+        $message->to('emailkamu@gmail.com')
+                ->subject('Test Email');
+    });
+
+    return 'Mail sent!';
+});
