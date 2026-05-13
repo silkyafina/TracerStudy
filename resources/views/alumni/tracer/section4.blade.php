@@ -30,7 +30,7 @@
                     <input class="form-check-input radio-red"
                            type="radio"
                            name="answers[{{ $q->id }}]"
-                           value="{{ $opt->id }}"
+                           value="{{ $opt->value }}"
                            required>
                     <label class="form-check-label">
                         {{ $opt->value }} - {{ $opt->label }}
