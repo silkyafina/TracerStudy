@@ -106,11 +106,11 @@
 </div>
 
 <div class="mt-3">
-    <button class="btn btn-success">
+    <button class="btn btn-maroon">
         <i class="bi bi-save me-1"></i>
         Simpan
     </button>
-    <a href="{{ route('admin.alumni.index') }}" class="btn btn-secondary">
+    <a href="{{ route('admin.alumni.index') }}" class="btn btn-cream">
         <i class="bi bi-arrow-left"></i>
         Kembali
     </a>

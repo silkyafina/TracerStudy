@@ -73,7 +73,7 @@
 
             {{-- AKSI --}}
             <div class="d-flex gap-2">
-                <button class="btn btn-primary">
+                <button class="btn btn-maroon">
                     <i class="bi bi-save"></i> Simpan
                 </button>
 

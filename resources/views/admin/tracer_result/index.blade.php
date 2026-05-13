@@ -146,4 +146,20 @@
             {{ $sessions->links() }}
             
         </div>
+<script>
+            setTimeout(() => {
+    let alert = document.querySelector('.alert');
+    if(alert){
+        alert.classList.remove('show');
+        alert.classList.add('fade');
+    }
+}, 3000);
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        tooltipTriggerList.map(function (el) {
+            return new bootstrap.Tooltip(el)
+        })
+    });
+</script>
 @endsection

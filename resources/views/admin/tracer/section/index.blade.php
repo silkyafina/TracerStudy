@@ -2,6 +2,19 @@
 @section('title','Section Tracer')
 
 @section('content')
+@if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+@if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="bi bi-check-circle-fill me-2"></i>
+        {{ session('success') }}
+
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+@endif
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h4 class="mb-0">
     <i class="bi bi-ui-checks"></i>
@@ -93,6 +106,20 @@
     </div>
 <script>
      document.addEventListener("DOMContentLoaded", function () {
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        tooltipTriggerList.map(function (el) {
+            return new bootstrap.Tooltip(el)
+        })
+    });
+    setTimeout(() => {
+    let alert = document.querySelector('.alert');
+    if(alert){
+        alert.classList.remove('show');
+        alert.classList.add('fade');
+    }
+}, 3000);
+
+    document.addEventListener("DOMContentLoaded", function () {
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
         tooltipTriggerList.map(function (el) {
             return new bootstrap.Tooltip(el)
