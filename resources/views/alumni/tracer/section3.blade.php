@@ -58,7 +58,7 @@
         <option value="">-- Pilih Jawaban --</option>
 
         @foreach($q->options as $opt)
-            <option value="{{ $opt->id }}">
+            <option value="{{ $opt->value }}">
                 {{ $opt->label }}
             </option>
         @endforeach
