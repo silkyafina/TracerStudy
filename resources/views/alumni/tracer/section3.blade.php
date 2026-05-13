@@ -59,7 +59,7 @@
 
         @foreach($q->options as $opt)
             <option value="{{ $opt->id }}">
-                {{ $opt->value }}
+                {{ $opt->label }}
             </option>
         @endforeach
     </select>

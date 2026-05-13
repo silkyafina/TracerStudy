@@ -98,7 +98,7 @@
                                         </ul>
                                     @else
                                         <p class="mb-0 mt-1 text-muted">
-                                            {{ $answer->selectedOption->value ?? $answer->value }}
+                                            {{ $answer->value ?? '-' }}
                                         </p>
                                     @endif
                                 </div>
