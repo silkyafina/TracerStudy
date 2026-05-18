@@ -175,9 +175,24 @@ public function collection()
                  */
                 else {
 
-                    $row[$questionText] = $answer
-                        ? $answer->value
-                        : '';
+                    if (!$answer) {
+                        $row[$questionText] = '';
+                        continue;
+                    }
+                
+                    $displayValue = $answer->value;
+                
+                    // cari option berdasarkan ID
+                    $option = $q->options
+                        ->where('id', $answer->value)
+                        ->first();
+                
+                    // kalau ketemu option → tampilkan label
+                    if ($option) {
+                        $displayValue = $option->label;
+                    }
+                
+                    $row[$questionText] = $displayValue;
                 }
             }
         }
