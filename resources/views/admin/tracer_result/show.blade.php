@@ -96,10 +96,25 @@
                                                 </li>
                                             @endforeach
                                         </ul>
-                                    @else
+                                        @else
+
+                                        @php
+                                            $displayValue = $answer->value;
+                                    
+                                            $option = $answer->question
+                                                ->options()
+                                                ->where('id', $answer->value)
+                                                ->first();
+                                    
+                                            if ($option) {
+                                                $displayValue = $option->label;
+                                            }
+                                        @endphp
+                                    
                                         <p class="mb-0 mt-1 text-muted">
-                                            {{ $answer->value ?? '-' }}
+                                            {{ $displayValue ?? '-' }}
                                         </p>
+                                    
                                     @endif
                                 </div>
                             @endforeach
