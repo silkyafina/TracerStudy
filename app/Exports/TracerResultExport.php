@@ -182,14 +182,12 @@ public function collection()
                 
                     $displayValue = $answer->value;
                 
-                    // cari option berdasarkan ID
                     $option = $q->options
                         ->where('id', $answer->value)
                         ->first();
                 
-                    // kalau ketemu option → tampilkan label
                     if ($option) {
-                        $displayValue = $option->label;
+                        $displayValue = $option->value;
                     }
                 
                     $row[$questionText] = $displayValue;
