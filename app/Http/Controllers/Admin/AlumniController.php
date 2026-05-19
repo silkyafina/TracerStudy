@@ -207,7 +207,7 @@ public function resetPassword($id)
     }
 
     $user->update([
-        'password' => Hash::make($alumni->nim),
+        'password' => Hash::make($alumni->tanggal_lahir),
         'must_change_password' => true,
     ]);
 
