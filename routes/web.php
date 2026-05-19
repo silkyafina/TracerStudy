@@ -73,10 +73,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
     });
     });
     Route::middleware(['admin','role:admin,admin_prodi'])->group(function () {
+        Route::get('/alumni/template', [AlumniController::class, 'downloadTemplate'])
+    ->name('alumni.template');
         Route::get('/alumni', [AlumniController::class, 'index'])->name('alumni.index');
-        Route::get('/alumni/{alumni}', [AlumniController::class, 'show'])->name('alumni.show');
         Route::get('alumni-export', [AlumniController::class, 'export'])
         ->name('alumni.export');
+        Route::get('/alumni/{alumni}', [AlumniController::class, 'show'])->name('alumni.show');
         Route::get('tracer-section', [TracerSectionController::class, 'index'])->name('tracer-section.index');
         Route::get('tracer-section/{id}', [TracerSectionController::class, 'show'])->name('tracer-section.show');
         Route::get('tracer-question', [TracerQuestionController::class, 'index'])->name('tracer-question.index');
@@ -110,8 +112,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/laporan/pengguna/pdf', [LaporanPenggunaController::class, 'exportPdf'])
         ->name('laporan.pengguna.pdf');
         Route::resource('prodi', ProdiController::class);
-        Route::get('/alumni/template', [AlumniController::class, 'downloadTemplate'])
-    ->name('alumni.template');
+        
     Route::get('/tracer/template', [TracerResultController::class, 'downloadTemplate'])
     ->name('tracer.template');
     });
