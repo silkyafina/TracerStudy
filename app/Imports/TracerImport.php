@@ -192,17 +192,7 @@ class TracerImport implements ToCollection, WithHeadingRow
                 $finalValue = (string) $value;
                 
                 // cek apakah question punya options
-                $option = TracerOption::where('tracer_question_id', $qid)
-                    ->where(function ($q) use ($value) {
-                        $q->where('label', $value)
-                          ->orWhere('value', $value);
-                    })
-                    ->first();
-                
-                // kalau ketemu option → simpan ID
-                if ($option) {
-                    $finalValue = $option->id;
-                }
+                $finalValue = (string) $value;
                 
                 TracerAnswer::create([
                     'tracer_session_id'  => $session->id,
