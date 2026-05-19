@@ -48,7 +48,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link-dashboard dropdown-toggle" href="#" data-bs-toggle="dropdown">
                             <i class="bi bi-person-circle me-1"></i>
-                            {{ Auth::guard('alumni')->user()->nama_lengkap ?? 'Alumni' }}
+                            {{ Auth::user()->alumni->nama_lengkap ?? 'Alumni' }}
                         </a>
                         
                         <ul class="dropdown-menu dropdown-menu-end">

@@ -20,15 +20,16 @@ class TracerController extends Controller
      *  HELPER
      * ========================== */
     private function getSession()
-    {
-        return TracerSession::where('alumni_id', Auth::user()->id)
-            ->where('status', 'draft')
-            ->firstOrFail();
-    }
+{
+    return TracerSession::where('alumni_id', Auth::user()->alumni->id)
+    ->where('status', 'draft')
+    ->first();
+}
 
     private function guardSection(int $urutan)
 {
-    $alumni = Auth::user();
+    $user = Auth::user();
+$alumni = $user?->alumni;
 
     $session = TracerSession::where('alumni_id', $alumni->id)
         ->where('status', 'draft')
@@ -77,15 +78,19 @@ class TracerController extends Controller
     return redirect()->route('alumni.tracer.section8');
     }
 
-    private function alumniProfileComplete($alumni): bool
-    {
+    private function alumniProfileComplete($user): bool
+{
+    $alumni = $user?->alumni;
+
+    if (!$alumni) return false;
+
     return $alumni->nik
         && $alumni->tanggal_lahir
         && $alumni->no_hp
         && $alumni->desa
         && $alumni->kecamatan
         && $alumni->kota;
-    }
+}
     private function saveAnswers($session, array $answers)
 {
     foreach ($answers as $questionId => $value) {
@@ -117,35 +122,39 @@ class TracerController extends Controller
      * ========================== */
 
      public function section1()
-     {
-         $alumni = Auth::guard('alumni')->user();
-     
-         // cek apakah profil alumni sudah lengkap
-         if ($this->alumniProfileComplete($alumni)) {
-     
-             // pastikan ada tracer session aktif
-             TracerSession::firstOrCreate(
-                 [
-                     'alumni_id' => $alumni->id,
-                     'status'    => 'draft',
-                 ],
-                 [
-                     'started_at' => now(),
-                     'current_section' => 2
-                 ]
-             );
-     
-             return redirect()->route('alumni.tracer.section2');
-         }
-     
-         return view('alumni.tracer.section1', compact('alumni'));
-     }
+{
+    $user = Auth::user();
+    $alumni = $user?->alumni;
+
+    if (!$alumni) {
+        return redirect()->route('alumni.dashboard');
+    }
+
+    if ($this->alumniProfileComplete($user)) {
+
+        TracerSession::firstOrCreate(
+            [
+                'alumni_id' => $alumni->id,
+                'status' => 'draft',
+            ],
+            [
+                'started_at' => now(),
+                'current_section' => 2
+            ]
+        );
+
+        return redirect()->route('alumni.tracer.section2');
+    }
+
+    return view('alumni.tracer.section1', compact('alumni'));
+}
      
 
     public function storeSection1(Request $request)
     {
         /** @var \App\Models\Alumni $alumni */
-        $alumni = Auth::user();
+        $user = Auth::user();
+        $alumni = $user?->alumni;
 
         $request->validate([
             'nik'           => 'required',
@@ -414,7 +423,8 @@ class TracerController extends Controller
 }
     public function riwayat()
     {
-        $alumni = Auth::user();
+        $user = Auth::user();
+$alumni = $user?->alumni;
 
     $sessions = TracerSession::where('alumni_id', $alumni->id)
         ->where('status', 'submitted')

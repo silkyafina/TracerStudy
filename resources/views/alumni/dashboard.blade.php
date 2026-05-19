@@ -8,7 +8,7 @@
     <div class="row mb-4">
         <div class="col-12">
             <div class="card-custom p-4">
-                <h3>Selamat Datang, {{ $alumni->nama_lengkap }}</h3>
+                <h3> Selamat Datang, {{ Auth::user()->alumni->nama_lengkap ?? 'Alumni' }}</h3>
                 <p class="text-muted mb-0">
                     Dashboard Tracer Study Alumni
                 </p>
