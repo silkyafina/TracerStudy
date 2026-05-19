@@ -48,11 +48,17 @@ class ProdiController extends Controller
     public function destroy($id)
     {
         $prodi = Prodi::findOrFail($id);
-
+    
+        if ($prodi->alumni()->count() > 0) {
+            return redirect()
+                ->route('admin.prodi.index')
+                ->with('error', 'Prodi tidak dapat dihapus karena masih digunakan oleh data alumni.');
+        }
+    
         $prodi->delete();
-
+    
         return redirect()
             ->route('admin.prodi.index')
-            ->with('success', 'Data prodi berhasil dihapus');
+            ->with('success', 'Data prodi berhasil dihapus.');
     }
 }

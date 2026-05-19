@@ -37,5 +37,9 @@ class Alumni extends Authenticatable
 {
     return $this->hasMany(TracerSession::class);
 }
+public function user()
+{
+    return $this->belongsTo(User::class);
+}
 }
 

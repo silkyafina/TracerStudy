@@ -156,4 +156,10 @@ class TracerResultController extends Controller
         ->route('admin.tracer.results.index')
         ->with('success', 'Data tracer berhasil diupload 🎉');
     }
+    public function downloadTemplate()
+{
+    $file = public_path('template/Template Hasil Tracer.xlsx');
+
+    return response()->download($file);
+}
 }

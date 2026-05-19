@@ -18,6 +18,11 @@
             {{ session('success') }}
         </div>
     @endif
+    @if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
 
     <div class="card shadow-sm border-0">
         <div class="card-body">
@@ -51,7 +56,7 @@
                                 <td class="text-center">
 
                                     <button
-                                        class="btn btn-warning btn-sm"
+                                        class="btn btn-cream btn-sm"
                                         data-bs-toggle="modal"
                                         data-bs-target="#modalEdit{{ $item->id }}"
                                     >
@@ -65,7 +70,7 @@
                                         @csrf
                                         @method('DELETE')
 
-                                        <button class="btn btn-danger btn-sm">
+                                        <button class="btn btn-maroon btn-sm">
                                             <i class="bi bi-trash"></i>
                                         </button>
                                     </form>

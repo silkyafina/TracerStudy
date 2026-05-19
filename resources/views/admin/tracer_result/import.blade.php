@@ -25,14 +25,25 @@
                     <input type="file" name="file" class="form-control" required>
                 </div>
 
-                <button class="btn btn-success">
-                    <i class="bi bi-upload me-1"></i>
-                    Upload
-                </button>
+                <div class="d-flex gap-2">
 
-                <a href="{{ route('admin.tracer.results.index') }}" class="btn btn-secondary">
-                    Kembali
-                </a>
+                    <button class="btn btn-success">
+                        <i class="bi bi-upload me-1"></i>
+                        Upload
+                    </button>
+                
+                    <a href="{{ route('admin.tracer.template') }}"
+                       class="btn btn-outline-success">
+                        <i class="bi bi-download me-1"></i>
+                        Download Template
+                    </a>
+                
+                    <a href="{{ route('admin.tracer.results.index') }}"
+                       class="btn btn-secondary">
+                        Kembali
+                    </a>
+                
+                </div>
 
             </form>
 

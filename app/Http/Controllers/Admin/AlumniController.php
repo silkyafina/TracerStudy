@@ -160,4 +160,10 @@ public function import(Request $request)
     ->route('admin.alumni.index')
     ->with('success', 'Data alumni berhasil ditambahkan');
 }
+public function downloadTemplate()
+{
+    $file = public_path('template/Template Data Alumni2.xlsx');
+
+    return response()->download($file);
+}
 }

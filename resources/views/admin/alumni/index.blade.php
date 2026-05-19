@@ -122,7 +122,7 @@
                 <a href="{{ route('admin.alumni.export', request()->all()) }}"
                    class="btn btn-maroon">
                     <i class="bi bi-file-earmark-excel me-1"></i>
-                    Excel
+                    Export
                 </a>
             </div>
 

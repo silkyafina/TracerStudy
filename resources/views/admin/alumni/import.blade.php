@@ -13,12 +13,25 @@
                 <input type="file" name="file" class="form-control" required>
             </div>
 
-            <button class="btn btn-success">
-                <i class="bi bi-upload"></i> Upload
-            </button>
-            <a href="{{ route('admin.alumni.index') }}" class="btn btn-secondary">
-                Kembali
-            </a>
+                <div class="d-flex gap-2">
+    
+                    <button class="btn btn-success">
+                        <i class="bi bi-upload"></i>
+                        Upload
+                    </button>
+                
+                    <a href="{{ route('admin.alumni.template') }}"
+                       class="btn btn-outline-success">
+                        <i class="bi bi-download"></i>
+                        Download Template
+                    </a>
+                
+                    <a href="{{ route('admin.alumni.index') }}"
+                       class="btn btn-secondary">
+                        Kembali
+                    </a>
+                
+                </div>
         </form>
     </div>
 </div>

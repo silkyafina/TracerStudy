@@ -57,5 +57,4 @@ class ProfilController extends Controller
         $prodi = Prodi::orderBy('nama_prodi')->get();
         return view('alumni.profil.edit', compact('alumni','prodi'));
     }
-
 }
