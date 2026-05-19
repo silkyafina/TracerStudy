@@ -191,7 +191,11 @@ Route::middleware('alumni')->group(function () {
         ->name('profil.edit');
         Route::put('/profil', [ProfilController::class, 'update'])
         ->name('profil.update');
-       
+        Route::get('/alumni/password', [ProfilController::class, 'editPassword'])
+        ->name('password.edit');
+    
+    Route::post('/alumni/password', [ProfilController::class, 'updatePassword'])
+        ->name('password.update');
 
         });
 

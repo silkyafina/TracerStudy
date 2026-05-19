@@ -44,16 +44,13 @@
                        placeholder="Masukkan NIM"
                        required>
 
-                <label>Tanggal Lahir</label>
-                <input type="date"
-                       name="tanggal_lahir"
-                       required>
+                       <label>Password</label>
+                       <input type="password"
+                              name="password"
+                              placeholder="Masukkan password"
+                              required>
 
                 <button type="submit">Masuk</button>
-                <p style="margin-top:10px;">
-                    Belum punya akun?
-                    <a href="{{ route('alumni.register') }}">Daftar di sini</a>
-                </p>
             </form>
         </div>
     </div>

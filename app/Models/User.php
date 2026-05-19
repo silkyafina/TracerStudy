@@ -2,20 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
-
     protected $table = 'users';
 
     protected $fillable = [
-        'name',
-        'email',
+        'alumni_id',
         'username',
+        'email',
         'password',
         'role',
     ];
@@ -29,9 +25,8 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    // Relasi ke alumni
     public function alumni()
     {
-        return $this->hasOne(Alumni::class);
+        return $this->belongsTo(Alumni::class);
     }
 }

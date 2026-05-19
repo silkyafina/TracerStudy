@@ -5,15 +5,19 @@ namespace App\Http\Controllers\Alumni;
 use App\Http\Controllers\Controller;
 use App\Models\TracerSession;
 use App\Models\TracerSection;
-use App\Models\TracerAnswer;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        $alumni = Auth::guard('alumni')->user();
+        $user = Auth::user();
 
+    if (!$user) {
+        return redirect()->route('alumni.login');
+    }
+
+    $alumni = $user;
         // Ambil session terakhir (draft atau submitted)
         $session = TracerSession::where('alumni_id', $alumni->id)
             ->latest()

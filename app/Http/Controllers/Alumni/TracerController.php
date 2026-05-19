@@ -21,14 +21,14 @@ class TracerController extends Controller
      * ========================== */
     private function getSession()
     {
-        return TracerSession::where('alumni_id', Auth::guard('alumni')->id())
+        return TracerSession::where('alumni_id', Auth::user()->id)
             ->where('status', 'draft')
             ->firstOrFail();
     }
 
     private function guardSection(int $urutan)
-    {
-    $alumni = Auth::guard('alumni')->user();
+{
+    $alumni = Auth::user();
 
     $session = TracerSession::where('alumni_id', $alumni->id)
         ->where('status', 'draft')
@@ -37,14 +37,15 @@ class TracerController extends Controller
     if (!$session) {
         return redirect()->route('alumni.dashboard');
     }
-    // Kalau user lompat ke depan
+
     if ($urutan > $session->current_section) {
         return redirect()->route(
             'alumni.tracer.section' . $session->current_section
         );
     }
+
     return null;
-    }
+}
     private function renderSection($urutan, $extra = [])
     {
         $redirect = $this->guardSection($urutan);
@@ -59,7 +60,7 @@ class TracerController extends Controller
 
         return view("alumni.tracer.section{$urutan}", array_merge([
             'section' => $section,
-            'alumni'  => Auth::guard('alumni')->user(),
+            'alumni' => Auth::user(),
         ], $extra));
     }
     private function storeSectionTo8(Request $request)
@@ -144,7 +145,7 @@ class TracerController extends Controller
     public function storeSection1(Request $request)
     {
         /** @var \App\Models\Alumni $alumni */
-        $alumni = Auth::guard('alumni')->user();
+        $alumni = Auth::user();
 
         $request->validate([
             'nik'           => 'required',
@@ -413,7 +414,7 @@ class TracerController extends Controller
 }
     public function riwayat()
     {
-    $alumni = Auth::guard('alumni')->user();
+        $alumni = Auth::user();
 
     $sessions = TracerSession::where('alumni_id', $alumni->id)
         ->where('status', 'submitted')
@@ -426,7 +427,7 @@ class TracerController extends Controller
     {
     // keamanan: pastikan milik alumni sendiri
     abort_if(
-        $session->alumni_id !== Auth::guard('alumni')->id(),
+        $session->alumni_id !== Auth::user()->id,
         403
     );
 

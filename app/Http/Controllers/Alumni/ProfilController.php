@@ -6,13 +6,17 @@ use App\Http\Controllers\Controller;
 use App\Models\Prodi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+
+
 
 class ProfilController extends Controller
 {
     public function index()
     {
         
-        $alumni = Auth::guard('alumni')->user();
+        $user = Auth::user();
+$alumni = $user->alumni;
         return view('alumni.profil.index', compact('alumni'));
     }
 
@@ -20,7 +24,8 @@ class ProfilController extends Controller
     {
         /** @var \App\Models\Alumni $alumni */
 
-        $alumni = Auth::guard('alumni')->user();        
+        $user = Auth::user();
+        $alumni = $user->alumni;      
 
         $request->validate([
         'nama_lengkap'  => 'required|string|max:255',
@@ -53,8 +58,40 @@ class ProfilController extends Controller
     }
     public function edit()
     {
-        $alumni = Auth::guard('alumni')->user();
+        $user = Auth::user();
+$alumni = $user->alumni;
         $prodi = Prodi::orderBy('nama_prodi')->get();
         return view('alumni.profil.edit', compact('alumni','prodi'));
     }
+ 
+public function editPassword()
+{
+    return view('alumni.profil.password');
+}
+
+public function updatePassword(Request $request)
+{
+    $request->validate([
+        'old_password' => 'required',
+        'password' => 'required|min:6|confirmed',
+    ]);
+
+    $user = \App\Models\User::find(Auth::id());
+
+    if (!$user) {
+        return back()->withErrors('User tidak ditemukan');
+    }
+
+    if (!Hash::check($request->old_password, $user->password)) {
+        return back()->withErrors([
+            'old_password' => 'Password lama tidak sesuai'
+        ]);
+    }
+
+    $user->update([
+        'password' => Hash::make($request->password),
+    ]);
+
+    return back()->with('success', 'Password berhasil diubah');
+}
 }
