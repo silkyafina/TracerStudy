@@ -28,7 +28,6 @@
                 
                     <a href="{{ route('admin.alumni.index') }}"
                        class="btn btn-secondary">
-                       <i class="bi bi-arrow-left">
                         Kembali
                     </a>
                 
