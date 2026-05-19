@@ -125,13 +125,13 @@
 
                                             <div class="modal-footer">
                                                 <button type="button"
-                                                        class="btn btn-secondary"
+                                                        class="btn btn-cream"
                                                         data-bs-dismiss="modal">
                                                     Batal
                                                 </button>
 
                                                 <button type="submit"
-                                                        class="btn btn-primary">
+                                                        class="btn btn-maroon">
                                                     Update
                                                 </button>
                                             </div>

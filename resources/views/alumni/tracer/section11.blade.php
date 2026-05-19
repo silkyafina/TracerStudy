@@ -20,7 +20,8 @@
 
             <label class="fw-semibold mb-2 d-block">
                 {{ $q->kode_pertanyaan ? "({$q->kode_pertanyaan})" : '' }}
-                {{ $q->pertanyaan }}
+                {{ $q->pertanyaan }} 
+                <span class="text-danger">*</span>
             </label>
             {{-- CHECKBOX --}}
             @if($q->tipe_jawaban == 'checkbox')

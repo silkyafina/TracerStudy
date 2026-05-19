@@ -15,19 +15,20 @@
 
                 <div class="d-flex gap-2">
     
-                    <button class="btn btn-success">
+                    <button class="btn btn-maroon">
                         <i class="bi bi-upload"></i>
                         Upload
                     </button>
                 
                     <a href="{{ route('admin.alumni.template') }}"
-                       class="btn btn-outline-success">
+                       class="btn btn-cream">
                         <i class="bi bi-download"></i>
                         Download Template
                     </a>
                 
                     <a href="{{ route('admin.alumni.index') }}"
                        class="btn btn-secondary">
+                       <i class="bi bi-arrow-left">
                         Kembali
                     </a>
                 

@@ -53,7 +53,7 @@
             <a href="{{ route('alumni.profil.edit') }}" class="btn btn-maroon">
                 <i class="bi bi-pencil me-1"></i> Edit Profil
             </a>
-            <a href="{{ route('alumni.password.edit') }}" class="btn btn-warning">
+            <a href="{{ route('alumni.password.edit') }}" class="btn btn-cream">
                 <i class="bi bi-key me-1"></i> Ubah Password
             </a>
             <a href="{{ route('alumni.dashboard') }}" class="btn btn-outline-secondary">

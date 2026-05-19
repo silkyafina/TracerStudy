@@ -27,19 +27,20 @@
 
                 <div class="d-flex gap-2">
 
-                    <button class="btn btn-success">
+                    <button class="btn btn-maroon">
                         <i class="bi bi-upload me-1"></i>
                         Upload
                     </button>
                 
                     <a href="{{ route('admin.tracer.template') }}"
-                       class="btn btn-outline-success">
+                       class="btn btn-cream">
                         <i class="bi bi-download me-1"></i>
                         Download Template
                     </a>
                 
                     <a href="{{ route('admin.tracer.results.index') }}"
                        class="btn btn-secondary">
+                       <i class="bi bi-arrow-left">
                         Kembali
                     </a>
                 
