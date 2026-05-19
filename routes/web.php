@@ -111,9 +111,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         ->name('laporan.pengguna.pdf');
         Route::resource('prodi', ProdiController::class);
         Route::get('/alumni/template', [AlumniController::class, 'downloadTemplate'])
-    ->name('admin.alumni.template');
+    ->name('alumni.template');
     Route::get('/tracer/template', [TracerResultController::class, 'downloadTemplate'])
-    ->name('admin.tracer.template');
+    ->name('tracer.template');
     });
 });
 
