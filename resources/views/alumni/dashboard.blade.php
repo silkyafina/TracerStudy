@@ -8,7 +8,7 @@
     <div class="row mb-4">
         <div class="col-12">
             <div class="card-custom p-4">
-                <h3> Selamat Datang, {{ Auth::user()->alumni->nama_lengkap ?? 'Alumni' }}</h3>
+                <h3> Selamat Datang, {{ Auth::user()?->alumni?->nama_lengkap ?? 'Alumni' }}</h3>
                 <p class="text-muted mb-0">
                     Dashboard Tracer Study Alumni
                 </p>
@@ -91,7 +91,7 @@
                     <i class="bi bi-hourglass-split"></i>
                 </div>
                 <div class="stat-value">
-                    {{ $status === 'submitted' ? 0 : $totalSection - ($currentSection - 1) }}
+                    {{ max($totalSection - $currentSection + 1, 0) }}
                 </div>
                 <div class="stat-label">Sisa Section</div>
             </div>
