@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\LaporanController;
 use App\Http\Controllers\Admin\LaporanPenggunaController;
+use App\Http\Controllers\Admin\ProdiController;
 use App\Http\Controllers\Admin\TracerOptionController;
 use App\Http\Controllers\Admin\TracerQuestionController;
 use App\Http\Controllers\Admin\TracerQuestionItemController;
@@ -108,6 +109,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         ->name('laporan.pengguna.excel');
         Route::get('/laporan/pengguna/pdf', [LaporanPenggunaController::class, 'exportPdf'])
         ->name('laporan.pengguna.pdf');
+        Route::resource('prodi', ProdiController::class);
     });
 });
 

@@ -51,6 +51,12 @@
                 <span>Laporan Pengguna Lulusan</span>
             </a>
         </li>
+        <li class="{{ request()->routeIs('admin.prodi.*') ? 'active' : '' }}">
+            <a href="{{ route('admin.prodi.index') }}">
+                <i class="bi bi-book"></i>
+                <span>Kelola Prodi</span>
+            </a>
+        </li>
     </ul>
 </div>
 
