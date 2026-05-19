@@ -75,6 +75,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware(['admin','role:admin,admin_prodi'])->group(function () {
         Route::get('/alumni/template', [AlumniController::class, 'downloadTemplate'])
     ->name('alumni.template');
+    Route::post('/admin/alumni/{id}/reset-password', [AlumniController::class, 'resetPassword'])
+    ->name('alumni.reset-password');
         Route::get('/alumni', [AlumniController::class, 'index'])->name('alumni.index');
         Route::get('alumni-export', [AlumniController::class, 'export'])
         ->name('alumni.export');

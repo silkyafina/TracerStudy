@@ -196,4 +196,21 @@ public function downloadTemplate()
 
     return response()->download($file);
 }
+public function resetPassword($id)
+{
+    $alumni = Alumni::findOrFail($id);
+
+    $user = User::where('alumni_id', $alumni->id)->first();
+
+    if (!$user) {
+        return back()->withErrors('User tidak ditemukan');
+    }
+
+    $user->update([
+        'password' => Hash::make($alumni->nim),
+        'must_change_password' => true,
+    ]);
+
+    return back()->with('success', 'Password berhasil direset');
+}
 }

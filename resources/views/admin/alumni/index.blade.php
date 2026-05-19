@@ -202,6 +202,18 @@
                         <i class="bi bi-lock"></i>
                         </button>
                         @endif
+                        <form action="{{ route('admin.alumni.reset-password', $a->id) }}"
+                            method="POST"
+                            class="d-inline">
+                          @csrf
+                      
+                          <button type="submit"
+                                  class="btn btn-sm btn-cream"
+                                  title="Reset Password"
+                                  onclick="return confirm('Reset password alumni ini?')">
+                              <i class="bi bi-key-fill"></i>
+                          </button>
+                      </form>
                     </td>
                 </tr>
                 @empty
