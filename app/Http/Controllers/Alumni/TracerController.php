@@ -450,5 +450,10 @@ $alumni = $user?->alumni;
     return view('alumni.tracer.riwayat-detail', compact('session'));
     }
 
-   
+    public function getKota($provinsi_id)
+{
+    $kota = \App\Models\TracerOption::where('parent_id', $provinsi_id)->get();
+
+    return response()->json($kota);
+}
 }
