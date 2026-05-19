@@ -162,7 +162,7 @@ public function import(Request $request)
 }
 public function downloadTemplate()
 {
-    $file = public_path('template/Template Data Alumni2.xlsx');
+    $file = public_path('template/template_alumni.xlsx');
 
     return response()->download($file);
 }

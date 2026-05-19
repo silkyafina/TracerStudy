@@ -158,7 +158,7 @@ class TracerResultController extends Controller
     }
     public function downloadTemplate()
 {
-    $file = public_path('template/Template Hasil Tracer.xlsx');
+    $file = public_path('template/template_tracer.xlsx');
 
     return response()->download($file);
 }
