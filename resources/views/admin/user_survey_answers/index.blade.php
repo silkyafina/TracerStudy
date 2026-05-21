@@ -163,14 +163,15 @@
                     @endforelse
                 </tbody>
             </table>
-
+        </div>
+    </div>
+</div>
             {{-- PAGINATION --}}
             <div class="mt-3">
                 {{ $surveys->links() }}
             </div>
 
-        </div>
-    </div>
+      
 
 </div>
 @endsection
