@@ -106,16 +106,16 @@ private function getData(Request $request)
     // JENIS KOMPETENSI
     // ======================
     return (clone $base)
-        ->selectRaw('
-            AVG(usa.integritas) as integritas,
-            AVG(usa.keahlian) as keahlian,
-            AVG(usa.bahasa_inggris) as bahasa_inggris,
-            AVG(usa.teknologi_informasi) as teknologi_informasi,
-            AVG(usa.komunikasi) as komunikasi,
-            AVG(usa.kerjasama_tim) as kerjasama_tim,
-            AVG(usa.pengembangan_diri) as pengembangan_diri
-        ')
-        ->first();
+    ->selectRaw('
+        AVG(usa.integritas) * 2 as integritas,
+        AVG(usa.keahlian) * 2 as keahlian,
+        AVG(usa.bahasa_inggris) * 2 as bahasa_inggris,
+        AVG(usa.teknologi_informasi) * 2 as teknologi_informasi,
+        AVG(usa.komunikasi) * 2 as komunikasi,
+        AVG(usa.kerjasama_tim) * 2 as kerjasama_tim,
+        AVG(usa.pengembangan_diri) * 2 as pengembangan_diri
+    ')
+    ->first();
 }
 public function exportExcel(Request $request)
 {
@@ -175,7 +175,7 @@ public function exportPdf(Request $request)
 
     } else {
 
-        $kompetensi = $this->getKompetensi($request);
+        $kompetensi = $this->getData($request);
 
         $pdf = Pdf::loadView('admin.laporan.pengguna.pdf', [
             'jenis' => 'kompetensi',

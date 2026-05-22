@@ -261,7 +261,7 @@ new Chart(document.getElementById('chartKompetensi'), {
     },
     options: {
         responsive: true,
-        scales: { y: { min: 0, max: 5 } }
+        scales: { y: { min: 0, max: 10 } }
     }
 });
 </script>
