@@ -71,7 +71,7 @@
             </div>
 
             <div class="col-md-2">
-                <label class="form-label">Tahun Dari</label>
+                <label class="form-label">Tahun Lulus dari</label>
                 <select name="tahun_dari" class="form-control">
                     <option value="">-</option>
                     @foreach ($tahun as $t)
@@ -84,7 +84,7 @@
             </div>
 
             <div class="col-md-2">
-                <label class="form-label">Tahun Sampai</label>
+                <label class="form-label">Tahun Lulus sampai</label>
                 <select name="tahun_sampai" class="form-control">
                     <option value="">-</option>
                     @foreach ($tahun as $t)

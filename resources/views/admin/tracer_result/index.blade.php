@@ -48,7 +48,7 @@
                 </div>
     
                 <div class="col-md-2">
-                    <label class="form-label">Tahun Dari</label>
+                    <label class="form-label">Tahun Lulus dari</label>
                     <select name="tahun_dari" class="form-control">
                         <option value="">-</option>
                         @foreach ($tahun as $t)
@@ -61,7 +61,7 @@
                 </div>
     
                 <div class="col-md-2">
-                    <label class="form-label">Tahun Sampai</label>
+                    <label class="form-label">Tahun Lulus sampai</label>
                     <select name="tahun_sampai" class="form-control">
                         <option value="">-</option>
                         @foreach ($tahun as $t)
@@ -105,8 +105,8 @@
                         <th>Nama Alumni</th>
                         <th>NIM</th>
                         <th>Prodi</th>
+                        <th>Tahun Lulus</th>
                         <th>Tracer Diisi</th>
-                        <th>Terakhir Isi</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -117,12 +117,12 @@
                         <td>{{ $row->alumni->nama_lengkap }}</td>
                         <td>{{ $row->alumni->nim }}</td>
                         <td>{{ $row->alumni->prodi->nama_prodi ?? '-' }}</td>
+                        <td>{{ $row->alumni->tahun_lulus ?? '-' }}</td>
                         <td>
                             <span class="badge bg-maroon">
                                 {{ $row->total_tracer }} kali
                             </span>
                         </td>
-                        <td>{{ \Carbon\Carbon::parse($row->last_filled)->format('d M Y') }}</td>
                         <td>
                             <a href="{{ route('admin.tracer.results.show', $row->alumni_id) }}"
                                class="btn btn-sm btn-cream"> <i class="bi bi-eye-fill"></i>

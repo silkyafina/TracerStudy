@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\DB;
 
 class TracerResultController extends Controller
 {
-    /**
-     * List alumni yang sudah mengisi tracer
-     */
+    
     public function index(Request $request)
 {
     $query = TracerSession::query()
@@ -43,19 +41,22 @@ class TracerResultController extends Controller
         });
     }
 
-    // 📅 FILTER TAHUN RANGE (created_at)
-    if ($request->tahun_dari && $request->tahun_sampai) {
-        if ($request->tahun_sampai < $request->tahun_dari) {
-            return back()
-                ->withInput()
-                ->with('error', 'Tahun sampai tidak boleh lebih kecil dari tahun dari');
-        }
+    // 📅 FILTER TAHUN LULUS ALUMNI
+if ($request->tahun_dari && $request->tahun_sampai) {
 
-        $query->whereBetween(
-            DB::raw('YEAR(created_at)'),
-            [$request->tahun_dari, $request->tahun_sampai]
-        );
+    if ($request->tahun_sampai < $request->tahun_dari) {
+        return back()
+            ->withInput()
+            ->with('error', 'Tahun sampai tidak boleh lebih kecil dari tahun dari');
     }
+
+    $query->whereHas('alumni', function ($q) use ($request) {
+        $q->whereBetween('tahun_lulus', [
+            $request->tahun_dari,
+            $request->tahun_sampai
+        ]);
+    });
+}
 
     $sessions = $query
         ->orderByDesc('last_filled')
@@ -68,10 +69,6 @@ class TracerResultController extends Controller
     return view('admin.tracer_result.index', compact('sessions','prodi','tahun'));
 }
 
-
-    /**
-     * Detail hasil tracer per alumni
-     */
     public function show($alumniId)
     {
         $alumni = \App\Models\Alumni::with('prodi')->findOrFail($alumniId);
