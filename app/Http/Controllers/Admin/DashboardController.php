@@ -211,7 +211,7 @@ public function exportPdf(Request $request)
     $rekapProdi = $this->getRekapProdi($request);
 
     $pdf = Pdf::loadView(
-        'admin.dashboard.export_pdf',
+        'admin.export_pdf',
         compact('rekapProdi')
     );
 

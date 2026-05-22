@@ -301,6 +301,23 @@
     </div>
 {{-- REKAP RESPONDEN --}}
 <div class="card border-0 shadow-sm mb-4">
+    <div class="d-flex gap-2 mb-3">
+
+        <a href="{{ route('admin.dashboard.export.excel', request()->all()) }}"
+           class="btn btn-maroon">
+    
+            <i class="bi bi-file-earmark-excel"></i>
+            Excel
+        </a>
+    
+        <a href="{{ route('admin.dashboard.export.pdf', request()->all()) }}"
+           class="btn btn-cream">
+    
+            <i class="bi bi-file-pdf"></i>
+            PDF
+        </a>
+    
+    </div>
 
     <div class="card-header bg-white">
         <h5 class="mb-0 fw-bold">
@@ -376,23 +393,7 @@
 <hr>
 
 <div class="d-flex justify-content-between align-items-center mb-3">
-    <div class="d-flex gap-2 mb-3">
-
-        <a href="{{ route('admin.dashboard.export.excel', request()->all()) }}"
-           class="btn btn-success">
     
-            <i class="bi bi-file-earmark-excel"></i>
-            Excel
-        </a>
-    
-        <a href="{{ route('admin.dashboard.export.pdf', request()->all()) }}"
-           class="btn btn-danger">
-    
-            <i class="bi bi-file-pdf"></i>
-            PDF
-        </a>
-    
-    </div>
     <h5 class="mb-0 fw-bold">
         Diagram Rekap Responden
     </h5>
