@@ -92,24 +92,31 @@ class DashboardController extends Controller
         // =========================
         // REKAP PER PRODI
         // =========================
-        $rekapProdi = Prodi::all()->map(function ($p) use ($request) {
+        $prodiQuery = Prodi::query();
 
+        if ($request->filled('prodi_id')) {
+            $prodiQuery->where('id', $request->prodi_id);
+        }
+        
+        $rekapProdi = $prodiQuery->get()->map(function ($p) use ($request) {
+        
             // Query alumni per prodi
             $alumni = Alumni::where('prodi_id', $p->id);
-
+        
             // Filter tahun
             if ($request->filled('tahun_dari') && $request->filled('tahun_sampai')) {
+        
                 $alumni->whereBetween('tahun_lulus', [
                     $request->tahun_dari,
                     $request->tahun_sampai
                 ]);
             }
-
+        
             $alumniIds = $alumni->pluck('id');
-
+        
             $jumlahAlumni = $alumniIds->count();
-
-            // Responden tracer
+        
+            // Jumlah responden
             $jumlahResponden = TracerAnswer::join(
                     'tracer_sessions',
                     'tracer_answers.tracer_session_id',
@@ -120,7 +127,7 @@ class DashboardController extends Controller
                 ->whereIn('tracer_sessions.alumni_id', $alumniIds)
                 ->distinct('tracer_sessions.alumni_id')
                 ->count('tracer_sessions.alumni_id');
-
+        
             return [
                 'nama_prodi' => $p->nama_prodi,
                 'jumlah_alumni' => $jumlahAlumni,

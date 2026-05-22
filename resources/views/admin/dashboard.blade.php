@@ -13,7 +13,7 @@
             <div class="row g-3 align-items-end">
 
                 <div class="col-md-3">
-                    <label>Tahun Dari</label>
+                    <label>Tahun Lulus Dari</label>
 
                     <select name="tahun_dari" class="form-control">
                         <option value="">-</option>
@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="col-md-3">
-                    <label>Tahun Sampai</label>
+                    <label>Tahun Lulus Sampai</label>
 
                     <select name="tahun_sampai" class="form-control">
                         <option value="">-</option>
