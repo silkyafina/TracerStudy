@@ -1,143 +1,77 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Alumni;
 
 use App\Http\Controllers\Controller;
-use App\Models\Alumni;
-use App\Models\Prodi;
-use App\Models\TracerAnswer;
-use Illuminate\Http\Request;
+use App\Models\TracerSession;
+use App\Models\TracerSection;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-    public function index(Request $request)
-    {
-        $tahun = range(date('Y'), 2000);
-        $prodi = Prodi::all();
+    public function index()
+{
+    $user = Auth::user();
 
-        // =========================
-        // FILTER ALUMNI
-        // =========================
-        $alumniQuery = Alumni::query();
+    if (!$user) {
+        return redirect()->route('alumni.login');
+    }
 
-        // Filter Prodi
-        if ($request->filled('prodi_id')) {
-            $alumniQuery->where('prodi_id', $request->prodi_id);
-        }
+    $alumni = $user->alumni;
 
-        // Filter Tahun Lulus
-        if ($request->filled('tahun_dari') && $request->filled('tahun_sampai')) {
+    if (!$alumni) {
+        return redirect()->route('alumni.login');
+    }
 
-            if ($request->tahun_sampai < $request->tahun_dari) {
-                return back()->with('error', 'Tahun sampai tidak boleh lebih kecil');
-            }
+    $session = TracerSession::where('alumni_id', $alumni->id)
+        ->latest()
+        ->first();
 
-            $alumniQuery->whereBetween('tahun_lulus', [
-                $request->tahun_dari,
-                $request->tahun_sampai
-            ]);
-        }
+    $totalSection = TracerSection::count();
 
-        // Ambil ID alumni hasil filter
-        $alumniIds = $alumniQuery->pluck('id');
+    $currentSection = $session?->current_section ?? 1;
+    $status = $session?->status ?? 'not_started';
 
-        // =========================
-        // TOTAL ALUMNI
-        // =========================
-        $totalAlumni = $alumniIds->count();
+    if ($status === 'submitted') {
+        $progress = 100;
+    } elseif ($session) {
+        $progress = round((($currentSection - 1) / $totalSection) * 100);
+    } else {
+        $progress = 0;
+    }
 
-        // =========================
-        // STATUS PEKERJAAN
-        // =========================
-        $statusAnswers = TracerAnswer::join(
-                'tracer_sessions',
-                'tracer_answers.tracer_session_id',
-                '=',
-                'tracer_sessions.id'
-            )
-            ->where('tracer_answers.tracer_question_id', 9)
-            ->whereIn('tracer_sessions.alumni_id', $alumniIds)
-            ->select(
-                'tracer_sessions.alumni_id',
-                'tracer_answers.value'
-            )
-            ->get()
-            ->unique('alumni_id');
+    $activities = [];
 
-        // Total responden
-        $totalResponden = $statusAnswers->count();
-
-        // Inisialisasi status
-        $status = [
-            'bekerja' => 0,
-            'wiraswasta' => 0,
-            'belum_bekerja' => 0,
-            'studi_lanjut' => 0,
-            'mencari_kerja' => 0,
+    if ($session) {
+        $activities[] = [
+            'tanggal' => $session->started_at,
+            'aktivitas' => 'Mulai pengisian Tracer Study',
+            'status' => 'Mulai'
         ];
 
-        // Hitung status
-        foreach ($statusAnswers as $answer) {
-
-            match ((int) $answer->value) {
-                1 => $status['bekerja']++,
-                2 => $status['belum_bekerja']++,
-                3 => $status['wiraswasta']++,
-                4 => $status['studi_lanjut']++,
-                5 => $status['mencari_kerja']++,
-                default => null,
-            };
-        }
-
-        // =========================
-        // REKAP PER PRODI
-        // =========================
-        $rekapProdi = Prodi::all()->map(function ($p) use ($request) {
-
-            // Query alumni per prodi
-            $alumni = Alumni::where('prodi_id', $p->id);
-
-            // Filter tahun
-            if ($request->filled('tahun_dari') && $request->filled('tahun_sampai')) {
-                $alumni->whereBetween('tahun_lulus', [
-                    $request->tahun_dari,
-                    $request->tahun_sampai
-                ]);
-            }
-
-            $alumniIds = $alumni->pluck('id');
-
-            $jumlahAlumni = $alumniIds->count();
-
-            // Responden tracer
-            $jumlahResponden = TracerAnswer::join(
-                    'tracer_sessions',
-                    'tracer_answers.tracer_session_id',
-                    '=',
-                    'tracer_sessions.id'
-                )
-                ->where('tracer_answers.tracer_question_id', 9)
-                ->whereIn('tracer_sessions.alumni_id', $alumniIds)
-                ->distinct('tracer_sessions.alumni_id')
-                ->count('tracer_sessions.alumni_id');
-
-            return [
-                'nama_prodi' => $p->nama_prodi,
-                'jumlah_alumni' => $jumlahAlumni,
-                'jumlah_responden' => $jumlahResponden,
-                'persentase' => $jumlahAlumni > 0
-                    ? round(($jumlahResponden / $jumlahAlumni) * 100, 2)
-                    : 0
+        if ($session->status === 'submitted') {
+            $activities[] = [
+                'tanggal' => $session->submitted_at,
+                'aktivitas' => 'Mengirim Tracer Study',
+                'status' => 'Selesai'
             ];
-        });
-
-        return view('admin.dashboard', compact(
-            'totalAlumni',
-            'totalResponden',
-            'status',
-            'tahun',
-            'prodi',
-            'rekapProdi'
-        ));
+        } else {
+            $activities[] = [
+                'tanggal' => now(),
+                'aktivitas' => 'Pengisian sampai Section ' . ($currentSection - 1),
+                'status' => 'Proses'
+            ];
+        }
     }
+
+    return view('alumni.dashboard', compact(
+        'alumni',
+        'session',
+        'progress',
+        'totalSection',
+        'currentSection',
+        'status',
+        'activities'
+    ));
+}
 }
