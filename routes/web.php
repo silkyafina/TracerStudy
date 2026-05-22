@@ -120,12 +120,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get(
         '/dashboard/export/excel',
         [DashboardController::class, 'exportExcel']
-    )->name('admin.dashboard.export.excel');
+    )->name('dashboard.export.excel');
     
     Route::get(
         '/dashboard/export/pdf',
         [DashboardController::class, 'exportPdf']
-    )->name('admin.dashboard.export.pdf');
+    )->name('dashboard.export.pdf');
     });
 });
 
