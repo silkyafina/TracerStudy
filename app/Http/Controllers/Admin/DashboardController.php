@@ -7,6 +7,9 @@ use App\Models\Alumni;
 use App\Models\Prodi;
 use App\Models\TracerAnswer;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\DashboardRekapExport;
 
 class DashboardController extends Controller
 {
@@ -147,4 +150,71 @@ class DashboardController extends Controller
             'rekapProdi'
         ));
     }
+    private function getRekapProdi(Request $request)
+{
+    $prodiQuery = Prodi::query();
+
+    if ($request->filled('prodi_id')) {
+        $prodiQuery->where('id', $request->prodi_id);
+    }
+
+    return $prodiQuery->get()->map(function ($p) use ($request) {
+
+        $alumni = Alumni::where('prodi_id', $p->id);
+
+        if ($request->filled('tahun_dari') &&
+            $request->filled('tahun_sampai')) {
+
+            $alumni->whereBetween('tahun_lulus', [
+                $request->tahun_dari,
+                $request->tahun_sampai
+            ]);
+        }
+
+        $alumniIds = $alumni->pluck('id');
+
+        $jumlahAlumni = $alumniIds->count();
+
+        $jumlahResponden = TracerAnswer::join(
+                'tracer_sessions',
+                'tracer_answers.tracer_session_id',
+                '=',
+                'tracer_sessions.id'
+            )
+            ->where('tracer_answers.tracer_question_id', 9)
+            ->whereIn('tracer_sessions.alumni_id', $alumniIds)
+            ->distinct('tracer_sessions.alumni_id')
+            ->count('tracer_sessions.alumni_id');
+
+        return [
+            'nama_prodi' => $p->nama_prodi,
+            'jumlah_alumni' => $jumlahAlumni,
+            'jumlah_responden' => $jumlahResponden,
+            'persentase' => $jumlahAlumni > 0
+                ? round(($jumlahResponden / $jumlahAlumni) * 100, 2)
+                : 0
+        ];
+    });
+}
+    public function exportExcel(Request $request)
+{
+    $rekapProdi = $this->getRekapProdi($request);
+
+    return Excel::download(
+        new DashboardRekapExport($rekapProdi),
+        'rekap_responden_tracer.xlsx'
+    );
+}
+
+public function exportPdf(Request $request)
+{
+    $rekapProdi = $this->getRekapProdi($request);
+
+    $pdf = Pdf::loadView(
+        'admin.dashboard.export_pdf',
+        compact('rekapProdi')
+    );
+
+    return $pdf->download('rekap_responden_tracer.pdf');
+}
 }

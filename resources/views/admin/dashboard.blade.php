@@ -373,6 +373,38 @@
     </div>
 
 </div>
+<hr>
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <div class="d-flex gap-2 mb-3">
+
+        <a href="{{ route('admin.dashboard.export.excel', request()->all()) }}"
+           class="btn btn-success">
+    
+            <i class="bi bi-file-earmark-excel"></i>
+            Excel
+        </a>
+    
+        <a href="{{ route('admin.dashboard.export.pdf', request()->all()) }}"
+           class="btn btn-danger">
+    
+            <i class="bi bi-file-pdf"></i>
+            PDF
+        </a>
+    
+    </div>
+    <h5 class="mb-0 fw-bold">
+        Diagram Rekap Responden
+    </h5>
+
+    <button id="downloadRekapChart"
+            class="btn btn-maroon">
+        <i class="bi bi-download"></i>
+        Download PNG
+    </button>
+</div>
+
+<canvas id="rekapChart" height="100"></canvas>
 
     {{-- INFORMASI --}}
     <div class="row">
@@ -555,5 +587,72 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error('Pie chart canvas not found');
     }
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    const ctx = document.getElementById('rekapChart');
+
+    if (!ctx) return;
+
+    const labels = @json($rekapProdi->pluck('nama_prodi'));
+
+    const jumlahAlumni = @json($rekapProdi->pluck('jumlah_alumni'));
+
+    const jumlahResponden = @json($rekapProdi->pluck('jumlah_responden'));
+
+    const rekapChart = new Chart(ctx, {
+
+        type: 'bar',
+
+        data: {
+            labels: labels,
+
+            datasets: [
+                {
+                    label: 'Jumlah Alumni',
+                    data: jumlahAlumni,
+                    borderWidth: 1
+                },
+
+                {
+                    label: 'Jumlah Responden',
+                    data: jumlahResponden,
+                    borderWidth: 1
+                }
+            ]
+        },
+
+        options: {
+            responsive: true,
+
+            plugins: {
+                legend: {
+                    position: 'top'
+                }
+            },
+
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // DOWNLOAD PNG
+    document.getElementById('downloadRekapChart')
+        ?.addEventListener('click', function () {
+
+            const link = document.createElement('a');
+
+            link.download = 'rekap_responden_tracer.png';
+
+            link.href = rekapChart.toBase64Image();
+
+            link.click();
+        });
+});
+
+
 </script>
 @endpush

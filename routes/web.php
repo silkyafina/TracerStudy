@@ -117,6 +117,15 @@ Route::prefix('admin')->name('admin.')->group(function () {
         
     Route::get('/tracer/template', [TracerResultController::class, 'downloadTemplate'])
     ->name('tracer.template');
+    Route::get(
+        '/dashboard/export/excel',
+        [DashboardController::class, 'exportExcel']
+    )->name('admin.dashboard.export.excel');
+    
+    Route::get(
+        '/dashboard/export/pdf',
+        [DashboardController::class, 'exportPdf']
+    )->name('admin.dashboard.export.pdf');
     });
 });
 
