@@ -301,42 +301,45 @@
     </div>
 {{-- REKAP RESPONDEN --}}
 <div class="card border-0 shadow-sm mb-4">
-    <div class="d-flex gap-2 mb-3">
 
-        <a href="{{ route('admin.dashboard.export.excel', request()->all()) }}"
-           class="btn btn-maroon">
-    
-            <i class="bi bi-file-earmark-excel"></i>
-            Excel
-        </a>
-    
-        <a href="{{ route('admin.dashboard.export.pdf', request()->all()) }}"
-           class="btn btn-cream">
-    
-            <i class="bi bi-file-pdf"></i>
-            PDF
-        </a>
-    
-    </div>
+    <div class="card-header bg-white d-flex justify-content-between align-items-center flex-wrap gap-2">
 
-    <div class="card-header bg-white">
         <h5 class="mb-0 fw-bold">
             Rekap Responden Tracer per Program Studi
         </h5>
+
+        <div class="d-flex gap-2">
+
+            <a href="{{ route('admin.dashboard.export.excel', request()->all()) }}"
+               class="btn btn-success btn-sm">
+
+                <i class="bi bi-file-earmark-excel"></i>
+                Export Excel
+            </a>
+
+            <a href="{{ route('admin.dashboard.export.pdf', request()->all()) }}"
+               class="btn btn-danger btn-sm">
+
+                <i class="bi bi-file-earmark-pdf"></i>
+                Export PDF
+            </a>
+
+        </div>
+
     </div>
 
     <div class="card-body">
 
         <div class="table-responsive">
 
-            <table class="table table-bordered text-center">
+            <table class="table table-bordered align-middle">
 
-                <thead class="table-dark">
+                <thead class="table-light text-center">
                     <tr>
                         <th>Program Studi</th>
                         <th>Jumlah Alumni</th>
                         <th>Jumlah Responden</th>
-                        <th>% Responden</th>
+                        <th>Persentase</th>
                     </tr>
                 </thead>
 
@@ -356,9 +359,18 @@
 
                         <tr>
                             <td>{{ $row['nama_prodi'] }}</td>
-                            <td>{{ $row['jumlah_alumni'] }}</td>
-                            <td>{{ $row['jumlah_responden'] }}</td>
-                            <td>{{ $row['persentase'] }}%</td>
+
+                            <td class="text-center">
+                                {{ $row['jumlah_alumni'] }}
+                            </td>
+
+                            <td class="text-center">
+                                {{ $row['jumlah_responden'] }}
+                            </td>
+
+                            <td class="text-center">
+                                {{ number_format($row['persentase'], 2) }}%
+                            </td>
                         </tr>
 
                     @endforeach
@@ -368,17 +380,25 @@
                 <tfoot class="table-secondary fw-bold">
 
                     <tr>
-                        <td>TOTAL</td>
 
-                        <td>{{ $totalAlumniTabel }}</td>
+                        <td class="text-center">
+                            TOTAL
+                        </td>
 
-                        <td>{{ $totalRespondenTabel }}</td>
+                        <td class="text-center">
+                            {{ $totalAlumniTabel }}
+                        </td>
 
-                        <td>
+                        <td class="text-center">
+                            {{ $totalRespondenTabel }}
+                        </td>
+
+                        <td class="text-center">
                             {{ $totalAlumniTabel > 0
-                                ? round(($totalRespondenTabel / $totalAlumniTabel) * 100, 2)
+                                ? number_format(($totalRespondenTabel / $totalAlumniTabel) * 100, 2)
                                 : 0 }}%
                         </td>
+
                     </tr>
 
                 </tfoot>

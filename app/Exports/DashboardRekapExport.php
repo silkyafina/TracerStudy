@@ -17,15 +17,32 @@ class DashboardRekapExport implements FromCollection, WithHeadings
 
     public function collection()
     {
-        return $this->data->map(function ($row) {
+        $rows = $this->data->map(function ($row) {
 
             return [
-                'Program Studi' => $row['nama_prodi'],
-                'Jumlah Alumni' => $row['jumlah_alumni'],
-                'Jumlah Responden' => $row['jumlah_responden'],
-                'Persentase' => $row['persentase'] . '%',
+                'Program Studi'     => $row['nama_prodi'],
+                'Jumlah Alumni'     => $row['jumlah_alumni'],
+                'Jumlah Responden'  => $row['jumlah_responden'],
+                'Persentase'        => number_format($row['persentase'], 2) . '%',
             ];
         });
+
+        $totalAlumni = $this->data->sum('jumlah_alumni');
+
+        $totalResponden = $this->data->sum('jumlah_responden');
+
+        $persentaseTotal = $totalAlumni > 0
+            ? round(($totalResponden / $totalAlumni) * 100, 2)
+            : 0;
+
+        $rows->push([
+            'Program Studi'     => 'TOTAL',
+            'Jumlah Alumni'     => $totalAlumni,
+            'Jumlah Responden'  => $totalResponden,
+            'Persentase'        => number_format($persentaseTotal, 2) . '%',
+        ]);
+
+        return $rows;
     }
 
     public function headings(): array
@@ -34,7 +51,7 @@ class DashboardRekapExport implements FromCollection, WithHeadings
             'Program Studi',
             'Jumlah Alumni',
             'Jumlah Responden',
-            'Persentase'
+            'Persentase',
         ];
     }
 }
