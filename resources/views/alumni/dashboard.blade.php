@@ -90,9 +90,11 @@
                 <div class="stat-icon warning">
                     <i class="bi bi-hourglass-split"></i>
                 </div>
+        
                 <div class="stat-value">
-                    {{ max($totalSection - $currentSection + 1, 0) }}
+                    {{ $sisaSection }}
                 </div>
+        
                 <div class="stat-label">Sisa Section</div>
             </div>
         </div>

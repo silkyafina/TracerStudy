@@ -311,14 +311,14 @@
         <div class="d-flex gap-2">
 
             <a href="{{ route('admin.dashboard.export.excel', request()->all()) }}"
-               class="btn btn-success btn-sm">
+               class="btn btn-maroon btn-sm">
 
                 <i class="bi bi-file-earmark-excel"></i>
                 Export Excel
             </a>
 
             <a href="{{ route('admin.dashboard.export.pdf', request()->all()) }}"
-               class="btn btn-danger btn-sm">
+               class="btn btn-cream btn-sm">
 
                 <i class="bi bi-file-earmark-pdf"></i>
                 Export PDF

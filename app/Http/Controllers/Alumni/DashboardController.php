@@ -34,10 +34,13 @@ class DashboardController extends Controller
 
     if ($status === 'submitted') {
         $progress = 100;
+        $sisaSection = 0;
     } elseif ($session) {
         $progress = round((($currentSection - 1) / $totalSection) * 100);
+        $sisaSection = max($totalSection - $currentSection + 1, 0);
     } else {
         $progress = 0;
+        $sisaSection = $totalSection;
     }
 
     $activities = [];
@@ -71,7 +74,8 @@ class DashboardController extends Controller
         'totalSection',
         'currentSection',
         'status',
-        'activities'
+        'activities',
+        'sisaSection'
     ));
 }
 }
