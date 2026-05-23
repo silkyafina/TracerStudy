@@ -4,7 +4,11 @@
 
 @section('content')
 <div class="container">
-
+    @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
     <a href="{{ route('admin.tracer.results.index') }}"
        class="btn btn-sm btn-outline-secondary mb-3">
         ← Kembali
@@ -73,7 +77,7 @@
     
                         {{-- EDIT --}}
                         <a href="{{ route('admin.tracer.results.edit', $session->id) }}"
-                           class="btn btn-sm btn-warning">
+                           class="btn btn-sm btn-cream">
                             <i class="bi bi-pencil-square"></i>
                             Edit
                         </a>
@@ -86,7 +90,7 @@
                             @csrf
                             @method('DELETE')
     
-                            <button class="btn btn-sm btn-danger">
+                            <button class="btn btn-sm btn-maroon">
                                 <i class="bi bi-trash"></i>
                                 Hapus
                             </button>
