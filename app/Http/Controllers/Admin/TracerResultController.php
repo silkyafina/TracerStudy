@@ -88,6 +88,53 @@ if ($request->tahun_dari && $request->tahun_sampai) {
             compact('alumni', 'sessions')
         );
     }
+    public function edit($id)
+    {
+        $session = TracerSession::with([
+            'answers.question.options',
+            'answers.question.items',
+            'answers.question.section'
+        ])->findOrFail($id);
+    
+        return view('admin.tracer_result.edit', compact('session'));
+    }
+    public function update(Request $request, $id)
+    {
+        $session = TracerSession::with('answers')->findOrFail($id);
+    
+        foreach ($session->answers as $answer) {
+    
+            // MATRIX / ITEM
+            if (is_array($request->answers[$answer->id] ?? null)) {
+    
+                $answer->update([
+                    'value' => json_encode($request->answers[$answer->id])
+                ]);
+    
+            } else {
+    
+                $answer->update([
+                    'value' => $request->answers[$answer->id]
+                ]);
+            }
+        }
+    
+        return redirect()
+            ->route('admin.tracer.results.show', $session->alumni_id)
+            ->with('success', 'Tracer berhasil diperbarui');
+    }
+public function destroy($id)
+{
+    $session = TracerSession::findOrFail($id);
+
+    $alumniId = $session->alumni_id;
+
+    $session->delete();
+
+    return redirect()
+        ->route('admin.tracer.results.show', $alumniId)
+        ->with('success', 'Tracer berhasil dihapus');
+}
     public function export(Request $request)
 {
     $query = TracerSession::with([

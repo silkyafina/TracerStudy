@@ -62,11 +62,39 @@
             <div class="tab-pane fade {{ $index === 0 ? 'show active' : '' }}"
                  id="tracer-{{ $session->id }}">
     
-                <div class="mb-3 text-muted">
-                    <strong>Tanggal Isi:</strong>
-                    {{ $session->created_at->format('d M Y') }}
-                </div>
+                 <div class="d-flex justify-content-between align-items-center mb-3">
+
+                    <div class="text-muted">
+                        <strong>Tanggal Isi:</strong>
+                        {{ $session->created_at->format('d M Y H:i') }}
+                    </div>
     
+                    <div class="d-flex gap-2">
+    
+                        {{-- EDIT --}}
+                        <a href="{{ route('admin.tracer.results.edit', $session->id) }}"
+                           class="btn btn-sm btn-warning">
+                            <i class="bi bi-pencil-square"></i>
+                            Edit
+                        </a>
+    
+                        {{-- DELETE --}}
+                        <form action="{{ route('admin.tracer.results.destroy', $session->id) }}"
+                              method="POST"
+                              onsubmit="return confirm('Yakin ingin menghapus tracer ini?')">
+    
+                            @csrf
+                            @method('DELETE')
+    
+                            <button class="btn btn-sm btn-danger">
+                                <i class="bi bi-trash"></i>
+                                Hapus
+                            </button>
+                        </form>
+    
+                    </div>
+    
+                </div>
                 @foreach(
                     $session->answers
                         ->filter(fn($a) => $a->question && $a->question->section)
