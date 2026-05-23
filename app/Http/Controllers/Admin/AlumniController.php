@@ -166,12 +166,24 @@ public function store(Request $request)
             ->with('success', 'Data alumni berhasil diperbarui');
     }
     public function destroy($id)
-    {
-        Alumni::findOrFail($id)->delete();
+{
+    $alumni = Alumni::findOrFail($id);
 
-        return redirect()->route('admin.alumni.index')
-            ->with('success', 'Data alumni berhasil dihapus');
-    }
+    // hapus user login
+    $alumni->user()?->delete();
+
+    // hapus tracer session
+    $alumni->tracerSessions()->delete();
+
+    // hapus user survey
+    $alumni->userSurveys()->delete();
+
+    // hapus alumni
+    $alumni->delete();
+
+    return redirect()->route('admin.alumni.index')
+        ->with('success', 'Data alumni berhasil dihapus');
+}
 
     public function importForm()
 {

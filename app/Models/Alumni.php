@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 
-class Alumni extends Authenticatable
+class Alumni extends Model
 {
     protected $table = 'alumni';
 
@@ -19,8 +19,8 @@ class Alumni extends Authenticatable
         'desa',
         'kecamatan',
         'kota'
-        
     ];
+
     protected $hidden = [
         'remember_token',
     ];
@@ -29,17 +29,19 @@ class Alumni extends Authenticatable
     {
         return $this->belongsTo(Prodi::class);
     }
-    public function UserSurvey()
-    {
-        return $this->belongsTo(UserSurvey::class);
-    }
-    public function tracerSessions()
-{
-    return $this->hasMany(TracerSession::class);
-}
-public function user()
-{
-    return $this->belongsTo(User::class);
-}
-}
 
+    public function tracerSessions()
+    {
+        return $this->hasMany(TracerSession::class);
+    }
+
+    public function userSurveys()
+    {
+        return $this->hasMany(UserSurvey::class);
+    }
+
+    public function user()
+    {
+        return $this->hasOne(User::class);
+    }
+}
