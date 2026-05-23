@@ -94,7 +94,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/admin/tracer-results/{id}/edit', [TracerResultController::class, 'edit']
         )->name('tracer.results.edit');
         Route::put('/admin/tracer-results/{id}', [TracerResultController::class, 'update']
-        )->name('admin.tracer.results.update');
+        )->name('tracer.results.update');
         Route::delete('/admin/tracer-results/{id}', [TracerResultController::class, 'destroy']
         )->name('tracer.results.destroy');
         Route::get('/tracer-results/export', [TracerResultController::class, 'export'])
