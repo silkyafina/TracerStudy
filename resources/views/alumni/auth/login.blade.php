@@ -47,7 +47,7 @@
                        <label>Password</label>
                        <input type="password"
                               name="password"
-                              placeholder="Masukkan password"
+                              placeholder="Contoh: 2003-12-20"
                               required>
 
                 <button type="submit">Masuk</button>
