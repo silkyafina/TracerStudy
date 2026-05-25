@@ -88,11 +88,15 @@
 
             {{-- TEXT --}}
             @if($q->tipe_jawaban == 'text')
-                <input type="text"
-                       class="form-control"
-                       name="answers[{{ $q->id }}]"
-                       required>
-            @endif
+
+    <input type="text"
+           class="form-control"
+           name="answers[{{ $q->id }}]"
+           value="{{ $q->id == 21 ? 'silky.afina.saly@gmail.com' : '' }}"
+           {{ $q->id == 21 ? 'readonly' : '' }}
+           required>
+
+@endif
 
             {{-- TEXTAREA --}}
             @if($q->tipe_jawaban == 'textarea')

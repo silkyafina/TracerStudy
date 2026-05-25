@@ -2,6 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\Prodi;
+use App\Models\TracerSession;
+use App\Models\UserSurvey;
+use App\Models\User;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Alumni extends Model
