@@ -74,11 +74,17 @@ if ($request->tahun_dari && $request->tahun_sampai) {
         $alumni = \App\Models\Alumni::with('prodi')->findOrFail($alumniId);
     
         $sessions = \App\Models\TracerSession::with([
-                'answers.question.section',
-                'answers.question.options',
-                'answers.question.items',
-                'answers.selectedOption'
-            ])
+            'answers' => function ($q) {
+                $q->join('tracer_questions', 'tracer_questions.id', '=', 'tracer_answers.tracer_question_id')
+                  ->join('tracer_sections', 'tracer_sections.id', '=', 'tracer_questions.tracer_section_id')
+                  ->orderBy('tracer_sections.urutan')
+                  ->select('tracer_answers.*');
+            },
+            'answers.question.section',
+            'answers.question.options',
+            'answers.question.items',
+            'answers.selectedOption'
+        ])
             ->where('alumni_id', $alumniId)
             ->orderByDesc('created_at')
             ->get();
