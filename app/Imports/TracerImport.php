@@ -100,6 +100,7 @@ class TracerImport implements ToCollection, WithHeadingRow
                 'magang' => 18,
                 'praktikum' => 19,
                 'kerja_lapangan' => 20,
+                'diskusi'=>21
             ]
         ];
         $checkboxMap = [
