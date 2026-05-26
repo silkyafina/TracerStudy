@@ -10,6 +10,7 @@ use App\Models\TracerOption;
 use App\Models\TracerQuestion;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use PhpOffice\PhpSpreadsheet\Shared\Date;
 
 class TracerImport implements ToCollection, WithHeadingRow
 {
@@ -54,7 +55,7 @@ class TracerImport implements ToCollection, WithHeadingRow
             "apa_posisi_jabatan_anda_saat_ini" => 26,
             "sumber_biaya_studi_lanjut" => 27,
             "nama_perguruan_tinggi" => 28,
-            "program_studi" => 29,
+            "program_studi_lanjut" => 29,
             "tanggal_masuk" => 30,
             "alamat_perguruan_tinggi" => 31,
             "kenapa_anda_belum_memungkinkan_bekerja" => 32,
@@ -190,6 +191,10 @@ class TracerImport implements ToCollection, WithHeadingRow
             if (isset($map[$col])) {
 
                 $qid = $map[$col];
+                if ($col === 'tanggal_masuk' && is_numeric($value)) {
+                    $value = Date::excelToDateTimeObject($value)
+                                ->format('d F Y');
+                }
                 $finalValue = (string) $value;
                 
                 // cek apakah question punya options
