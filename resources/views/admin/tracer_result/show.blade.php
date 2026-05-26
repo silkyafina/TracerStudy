@@ -131,26 +131,24 @@
                                         @else
 
                                         @php
-                                        $displayValue = $answer->value;
+                                            $displayValue = $answer->value;
+                                      use PhpOffice\PhpSpreadsheet\Shared\Date;
 
-                                        // HANDLE TANGGAL EXCEL
-                                        if (
-                                            str_contains(strtolower($answer->question->pertanyaan), 'tanggal')
-                                            && is_numeric($displayValue)
-                                        ) {
-                                            $displayValue = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($displayValue)
-                                                ->format('d F Y');
-                                        }
-
-                                        // HANDLE OPTION LABEL
-                                        $option = $answer->question
-                                            ->options
-                                            ->where('value', $answer->value)
-                                            ->first();
-
-                                        if ($option) {
-                                            $displayValue = $option->label;
-                                        }
+    if (
+        str_contains(strtolower($answer->question->pertanyaan), 'tanggal')
+        && is_numeric($displayValue)
+    ) {
+        $displayValue = Date::excelToDateTimeObject($displayValue)
+            ->format('d F Y');
+    }
+                                            $option = $answer->question
+                                                ->options()
+                                                ->where('id', $answer->value)
+                                                ->first();
+                                    
+                                            if ($option) {
+                                                $displayValue = $option->label;
+                                            }
                                         @endphp
                                     
                                         <p class="mb-0 mt-1 text-muted">
