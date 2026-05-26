@@ -166,14 +166,22 @@ public function destroy($id)
     }
 
     // 📅 FILTER TAHUN
-    if ($request->filled('tahun_dari') && $request->filled('tahun_sampai')) {
-        if ($request->tahun_sampai < $request->tahun_dari) {
-            return back()->with('error', 'Tahun sampai tidak boleh lebih kecil');
-        }
+     // 📅 FILTER TAHUN LULUS
+if ($request->filled('tahun_dari') && $request->filled('tahun_sampai')) {
 
-        $query->whereYear('submitted_at', '>=', $request->tahun_dari)
-              ->whereYear('submitted_at', '<=', $request->tahun_sampai);
+    if ($request->tahun_sampai < $request->tahun_dari) {
+        return back()->with('error', 'Tahun sampai tidak boleh lebih kecil');
     }
+
+    $query->whereHas('alumni', function ($q) use ($request) {
+
+        $q->whereBetween('tahun_lulus', [
+            $request->tahun_dari,
+            $request->tahun_sampai
+        ]);
+
+    });
+}
 
     $sessions = $query
     ->whereIn('id', function ($q) {
