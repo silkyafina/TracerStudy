@@ -20,6 +20,10 @@
         @foreach(
             $session->answers
                 ->filter(fn($a) => $a->question && $a->question->section)
+                ->sortBy([
+                    fn($a) => $a->question->section->urutan,
+                    fn($a) => $a->question->urutan,
+                ])
                 ->groupBy(fn($a) => $a->question->section->nama_section)
             as $section => $answers
         )
@@ -47,7 +51,7 @@
                             {{-- MATRIX --}}
                             @if(is_array($decoded) && $answer->question->items->count())
 
-                                @foreach($answer->question->items as $item)
+                            @foreach($answer->question->items->sortBy('urutan') as $item)
 
                                     <div class="mb-2">
 
@@ -73,8 +77,8 @@
 
                                     @foreach($answer->question->options as $option)
 
-                                        <option value="{{ $option->id }}"
-                                            {{ $answer->value == $option->id ? 'selected' : '' }}>
+                                    <option value="{{ $option->value }}"
+                                        {{ $answer->value == $option->value ? 'selected' : '' }}>
 
                                             {{ $option->label }}
 
