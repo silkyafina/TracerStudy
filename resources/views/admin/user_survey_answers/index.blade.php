@@ -24,13 +24,13 @@
             {{-- IMPORT --}}
             <a href="{{ route('admin.user_survey_answers.import.form') }}"
                class="btn btn-cream">
-                <i class="bi bi-upload me-1"></i> Import
+                <i class="bi bi-upload me-1"></i> Import Excel
             </a>
 
             {{-- EXPORT --}}
             <a href="{{ route('admin.user_survey_answers.export', request()->all()) }}"
                class="btn btn-maroon">
-                <i class="bi bi-file-earmark-excel me-1"></i> Export
+                <i class="bi bi-file-earmark-excel me-1"></i> Export Excel
             </a>
 
         </div>

@@ -21,7 +21,7 @@
                        required>
             </div>
 
-            <button class="btn btn-success">
+            <button class="btn btn-maroon">
                 <i class="bi bi-upload"></i> Upload
             </button>
 
