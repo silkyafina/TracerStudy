@@ -107,17 +107,17 @@ Route::prefix('admin')->name('admin.')->group(function () {
         ->name('user_survey_answers.index');
         Route::get('/user-survey-answers/export',[UserSurveyAnswerController::class, 'export']
         )->name('user_survey_answers.export');
+        Route::get('/user-survey-answers/import',
+    [UserSurveyAnswerController::class, 'importForm'])
+    ->name('user_survey_answers.import.form');
+    Route::get('/user-survey-answers/template', [UserSurveyAnswerController::class, 'downloadTemplate'])
+    ->name('user_survey_answers.template');
         Route::get('/user-survey-answers/{id}', [UserSurveyAnswerController::class, 'show'])
         ->name('user_survey_answers.show');
         Route::get('/laporan-pengguna', [LaporanPenggunaController::class, 'index'])
         ->name('laporan.pengguna.index');
         Route::get('/laporan/pengguna/excel', [LaporanPenggunaController::class, 'exportExcel'])
         ->name('laporan.pengguna.excel');
-        Route::get('/user-survey-answers/import',
-    [UserSurveyAnswerController::class, 'importForm'])
-    ->name('user_survey_answers.import.form');
-    Route::get('/user-survey-answers/template', [UserSurveyAnswerController::class, 'downloadTemplate'])
-    ->name('user_survey_answers.template');
         Route::get('/laporan/pengguna/pdf', [LaporanPenggunaController::class, 'exportPdf'])
         ->name('laporan.pengguna.pdf');
         Route::resource('prodi', ProdiController::class);
