@@ -65,6 +65,7 @@ class DashboardController extends Controller
         ->whereIn('tracer_sessions.id', function ($q) {
             $q->select(DB::raw('MAX(id)'))
               ->from('tracer_sessions')
+              ->where('status', 'submitted')
               ->groupBy('alumni_id');
         })
     
@@ -136,6 +137,12 @@ class DashboardController extends Controller
                     'tracer_sessions.id'
                 )
                 ->where('tracer_answers.tracer_question_id', 9)
+                ->whereIn('tracer_sessions.id', function ($q) {
+                    $q->select(DB::raw('MAX(id)'))
+                      ->from('tracer_sessions')
+                      ->where('status', 'submitted')
+                      ->groupBy('alumni_id');
+                })
                 ->whereIn('tracer_sessions.alumni_id', $alumniIds)
                 ->distinct('tracer_sessions.alumni_id')
                 ->count('tracer_sessions.alumni_id');
@@ -191,6 +198,12 @@ class DashboardController extends Controller
                 'tracer_sessions.id'
             )
             ->where('tracer_answers.tracer_question_id', 9)
+            ->whereIn('tracer_sessions.id', function ($q) {
+                $q->select(DB::raw('MAX(id)'))
+                  ->from('tracer_sessions')
+                  ->where('status', 'submitted')
+                  ->groupBy('alumni_id');
+            })
             ->whereIn('tracer_sessions.alumni_id', $alumniIds)
             ->distinct('tracer_sessions.alumni_id')
             ->count('tracer_sessions.alumni_id');
