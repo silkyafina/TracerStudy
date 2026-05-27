@@ -105,7 +105,11 @@ public function import(Request $request)
 }
 public function downloadTemplate(): BinaryFileResponse
 {
+<<<<<<< HEAD
     $path = public_path('template/penilaian_pengguna_template.xlsx');
+=======
+    $path = public_path('templates/penilaian_pengguna_template.xlsx');
+>>>>>>> 3f9fbca (pengguna lulusan)
 
     return response()->download($path);
 }
