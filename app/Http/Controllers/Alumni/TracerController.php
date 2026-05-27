@@ -435,19 +435,25 @@ $alumni = $user?->alumni;
     }
     public function detailRiwayat(TracerSession $session)
     {
-    // keamanan: pastikan milik alumni sendiri
-    abort_if(
-        $session->alumni_id !== Auth::user()->id,
-        403
-    );
-
-    $session->load([
-        'answers.question.section',
-        'answers.question.options',
-        'answers.question.items'
-    ]);
-
-    return view('alumni.tracer.riwayat-detail', compact('session'));
+        $user = Auth::user();
+    
+        // pastikan user punya relasi alumni
+        abort_if(
+            !$user->alumni ||
+            $session->alumni_id !== $user->alumni->id,
+            403
+        );
+    
+        $session->load([
+            'answers.question.section',
+            'answers.question.options',
+            'answers.question.items'
+        ]);
+    
+        return view(
+            'alumni.tracer.riwayat-detail',
+            compact('session')
+        );
     }
 
     public function getKota($provinsi_id)
