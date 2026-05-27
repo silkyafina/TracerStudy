@@ -31,8 +31,10 @@ class LaporanController extends Controller
     $allowedQuestionIds = [9, 3, 7, 8, 18, 22, 23, 26, 27, 42, 43, 51];
 
     $pertanyaan = TracerQuestion::whereIn('id', $allowedQuestionIds)
-        ->orderBy('urutan')
-        ->get();
+    ->get()
+    ->sortBy(function ($q) use ($allowedQuestionIds) {
+        return array_search($q->id, $allowedQuestionIds);
+    });
 
     // =========================
     // DEFAULT
@@ -104,7 +106,10 @@ class LaporanController extends Controller
         $raw = $this->getDataLaporan($request);
 
         $years      = $raw->pluck('tahun_lulus')->unique()->sort()->values();
-        $categories = $raw->pluck('kategori')->unique()->values();
+        $categories = $question->options
+    ->sortBy('urutan')
+    ->pluck('label')
+    ->values();
 
         foreach ($years as $year) {
 
@@ -460,7 +465,10 @@ public function exportExcel(Request $request)
         $raw = $this->getDataLaporan($request);
 
         $years      = $raw->pluck('tahun_lulus')->unique()->sort()->values();
-        $categories = $raw->pluck('kategori')->unique()->values();
+        $categories = $question->options
+    ->sortBy('urutan')
+    ->pluck('label')
+    ->values();
         $table      = [];
 
         foreach ($years as $year) {
@@ -560,7 +568,10 @@ public function exportPdf(Request $request)
         $raw = $this->getDataLaporan($request);
 
         $years      = $raw->pluck('tahun_lulus')->unique()->sort()->values();
-        $categories = $raw->pluck('kategori')->unique()->values();
+        $categories = $question->options
+    ->sortBy('urutan')
+    ->pluck('label')
+    ->values();
 
         foreach ($years as $year) {
 
