@@ -105,7 +105,7 @@ public function import(Request $request)
 }
 public function downloadTemplate(): BinaryFileResponse
 {
-    $path = public_path('templates/template_penilaian_pengguna.xlsx');
+    $path = public_path('template/penilaian_pengguna_template.xlsx');
 
     return response()->download($path);
 }
