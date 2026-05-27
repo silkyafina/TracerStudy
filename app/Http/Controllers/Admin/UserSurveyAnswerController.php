@@ -10,7 +10,7 @@ use App\Models\UserSurveyAnswer;
 use App\Models\Prodi;
 use App\Models\UserSurvey;
 use Maatwebsite\Excel\Facades\Excel;
-
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 class UserSurveyAnswerController extends Controller
 {
 
@@ -99,7 +99,14 @@ public function import(Request $request)
 
     Excel::import(new UserSurveyAnswerImport, $request->file('file'));
 
-    return back()->with('success', 'Import berhasil!');
+    return redirect()
+    ->route('admin.user_survey_answers.index')
+    ->with('success', 'Data penilaian pengguna berhasil diimport.');
 }
+public function downloadTemplate(): BinaryFileResponse
+{
+    $path = public_path('templates/template_penilaian_pengguna.xlsx');
 
+    return response()->download($path);
+}
 }

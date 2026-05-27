@@ -120,6 +120,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/user-survey-answers/import',
     [UserSurveyAnswerController::class, 'importForm'])
     ->name('user_survey_answers.import.form');
+    Route::get('/user-survey-answers/template', function () {
+        return response()->download(
+            public_path('templates/template_penilaian_pengguna.xlsx')
+        );
+    })->name('user_survey_answers.template');
 
         Route::get('/laporan/pengguna/pdf', [LaporanPenggunaController::class, 'exportPdf'])
         ->name('laporan.pengguna.pdf');
