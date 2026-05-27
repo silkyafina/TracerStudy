@@ -132,11 +132,12 @@
                         <td style="min-width:200px;">
                             <div class="d-flex gap-1">
                                 <input type="text"
+                                       id="link-{{ $survey->id }}"
                                        value="{{ url('/survey/pengguna/'.$survey->token) }}"
                                        class="form-control form-control-sm"
                                        readonly>
-
-                                <button onclick="navigator.clipboard.writeText('{{ url('/survey/pengguna/'.$survey->token) }}')"
+                        
+                                <button onclick="copyLink('{{ $survey->id }}')"
                                         class="btn btn-sm btn-cream">
                                     Copy
                                 </button>
@@ -174,4 +175,18 @@
       
 
 </div>
+<script>
+    function copyLink(id) {
+    
+        let input = document.getElementById('link-' + id);
+    
+        navigator.clipboard.writeText(input.value)
+            .then(() => {
+                alert('Link berhasil disalin');
+            })
+            .catch(() => {
+                alert('Gagal menyalin link');
+            });
+    }
+    </script>
 @endsection
