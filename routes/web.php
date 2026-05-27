@@ -66,10 +66,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         ->except(['index','show']);
         Route::resource('tracer-option', TracerOptionController::class)
         ->except(['index','show']);
-        Route::post('/user-survey-answers/import', [UserSurveyAnswerController::class, 'import'])
-    ->name('user_survey_answers.import');
-    Route::get('user-survey-answers/import', [UserSurveyAnswerController::class, 'importForm'])
-        ->name('user_survey_answers.import.form');
     });
     });
     Route::middleware(['admin','role:admin,admin_prodi'])->group(function () {
@@ -120,12 +116,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/user-survey-answers/import',
     [UserSurveyAnswerController::class, 'importForm'])
     ->name('user_survey_answers.import.form');
-    Route::get('/user-survey-answers/template', function () {
-        return response()->download(
-            public_path('template/penilaian_pengguna_template.xlsx')
-        );
-    })->name('user_survey_answers.template');
-
+    Route::get('/user-survey-answers/template', [UserSurveyAnswerController::class, 'downloadTemplate'])
+    ->name('user_survey_answers.template');
         Route::get('/laporan/pengguna/pdf', [LaporanPenggunaController::class, 'exportPdf'])
         ->name('laporan.pengguna.pdf');
         Route::resource('prodi', ProdiController::class);
