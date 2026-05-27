@@ -8,7 +8,23 @@
             <i class="bi bi-person-check"></i> Penilaian Pengguna Alumni
         </h4>
     </div>
+    <div class="d-flex gap-2">
 
+        {{-- IMPORT --}}
+        <a href="{{ route('admin.user_survey_answers.import.form') }}"
+           class="btn btn-cream">
+            <i class="bi bi-upload me-1"></i> Import
+        </a>
+
+        {{-- EXPORT --}}
+        <a href="{{ route('admin.user_survey_answers.export', request()->all()) }}"
+           class="btn btn-maroon">
+            <i class="bi bi-file-earmark-excel me-1"></i> Export
+        </a>
+
+    </div>
+
+</div>
     {{-- =======================
         FILTER
     ======================== --}}
@@ -72,11 +88,6 @@
                     <a href="{{ route('admin.user_survey_answers.index') }}"
                        class="btn btn-cream">
                         <i class="bi bi-arrow-clockwise me-1"></i> Reset
-                    </a>
-
-                    <a href="{{ route('admin.user_survey_answers.export', request()->all()) }}"
-                       class="btn btn-maroon">
-                        <i class="bi bi-file-earmark-excel me-1"></i> Excel
                     </a>
                 </div>
 

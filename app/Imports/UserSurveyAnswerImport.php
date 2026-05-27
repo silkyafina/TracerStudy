@@ -21,9 +21,14 @@ class UserSurveyAnswerImport implements ToCollection, WithHeadingRow
 
         if (!$alumni) continue;
         // 🔥 FIX DI SINI (WAJIB)
-        $userSurvey = UserSurvey::firstOrCreate([
-            'alumni_id' => $alumni->id
-        ]);
+        $userSurvey = UserSurvey::firstOrCreate(
+            [
+                'alumni_id' => $alumni->id
+            ],
+            [
+                'email' => $row['email']
+            ]
+        );
 
         // 💾 simpan jawaban
         UserSurveyAnswer::updateOrCreate(
@@ -45,6 +50,9 @@ class UserSurveyAnswerImport implements ToCollection, WithHeadingRow
                 'saran' => $row['saran_dan_masukan'] ?? null,
             ]
         );
+        $userSurvey->update([
+            'is_filled' => true
+        ]);
     }
 }
  

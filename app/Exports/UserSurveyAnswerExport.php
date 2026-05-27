@@ -17,7 +17,8 @@ class UserSurveyAnswerExport implements FromView
 
     public function view(): View
     {
-        $query = UserSurveyAnswer::with('userSurvey.alumni.prodi');
+        $query = UserSurveyAnswer::with('userSurvey.alumni.prodi')
+        ->whereHas('userSurvey.alumni');
 
         // SEARCH
         if ($this->request->search) {
@@ -37,13 +38,13 @@ class UserSurveyAnswerExport implements FromView
         // TAHUN
         if ($this->request->tahun_dari) {
             $query->whereHas('userSurvey.alumni', function ($q) {
-                $q->whereYear('tahun_lulus', '>=', $this->request->tahun_dari);
+                $q->where('tahun_lulus', '>=', $this->request->tahun_dari);
             });
         }
 
         if ($this->request->tahun_sampai) {
             $query->whereHas('userSurvey.alumni', function ($q) {
-                $q->whereYear('tahun_lulus', '<=', $this->request->tahun_sampai);
+                $q->where('tahun_lulus', '<=', $this->request->tahun_sampai);
             });
         }
 
