@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\DashboardRekapExport;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -53,19 +54,27 @@ class DashboardController extends Controller
         // STATUS PEKERJAAN
         // =========================
         $statusAnswers = TracerAnswer::join(
-                'tracer_sessions',
-                'tracer_answers.tracer_session_id',
-                '=',
-                'tracer_sessions.id'
-            )
-            ->where('tracer_answers.tracer_question_id', 9)
-            ->whereIn('tracer_sessions.alumni_id', $alumniIds)
-            ->select(
-                'tracer_sessions.alumni_id',
-                'tracer_answers.value'
-            )
-            ->get()
-            ->unique('alumni_id');
+            'tracer_sessions',
+            'tracer_answers.tracer_session_id',
+            '=',
+            'tracer_sessions.id'
+        )
+        ->where('tracer_answers.tracer_question_id', 9)
+    
+        // hanya session terakhir
+        ->whereIn('tracer_sessions.id', function ($q) {
+            $q->select(DB::raw('MAX(id)'))
+              ->from('tracer_sessions')
+              ->groupBy('alumni_id');
+        })
+    
+        ->whereIn('tracer_sessions.alumni_id', $alumniIds)
+    
+        ->select(
+            'tracer_sessions.alumni_id',
+            'tracer_answers.value'
+        )
+        ->get();
 
         // Total responden
         $totalResponden = $statusAnswers->count();
