@@ -107,6 +107,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         ->name('user_survey_answers.index');
         Route::get('/user-survey-answers/export',[UserSurveyAnswerController::class, 'export']
         )->name('user_survey_answers.export');
+        Route::post('/user-survey-answers/import',
+    [UserSurveyAnswerController::class, 'import']
+)->name('user_survey_answers.import');
         Route::get('/user-survey-answers/import',
     [UserSurveyAnswerController::class, 'importForm'])
     ->name('user_survey_answers.import.form');
