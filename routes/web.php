@@ -119,7 +119,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         ->name('laporan.pengguna.excel');
         Route::get('/user-survey-answers/import',
     [UserSurveyAnswerController::class, 'importForm'])
-    ->name('admin.user_survey_answers.import.form');
+    ->name('user_survey_answers.import.form');
 
         Route::get('/laporan/pengguna/pdf', [LaporanPenggunaController::class, 'exportPdf'])
         ->name('laporan.pengguna.pdf');
