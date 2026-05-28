@@ -142,7 +142,7 @@
                     @forelse($data as $item)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $item->nama }}</td>
+                            <td>{{ $item->nama_lengkap }}</td>
                             <td>{{ $item->tahun_lulus }}</td>
                             <td>{{ $item->nama_perusahaan }}</td>
                             <td style="white-space: normal;">

@@ -112,7 +112,7 @@ private function getData(Request $request)
 
         return (clone $base)
             ->select(
-                'a.nama',
+                'a.nama_lengkap',
                 'a.tahun_lulus',
                 'usa.nama_perusahaan',
                 'usa.saran'

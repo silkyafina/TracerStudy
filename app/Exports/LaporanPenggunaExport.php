@@ -33,7 +33,7 @@ class LaporanPenggunaExport implements FromCollection, WithHeadings
 
             return collect($this->data)->map(function ($row) {
                 return [
-                    $row->nama,
+                    $row->nama_lengkap,
                     $row->tahun_lulus,
                     $row->nama_perusahaan,
                     $row->saran
