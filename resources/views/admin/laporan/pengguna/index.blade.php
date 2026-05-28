@@ -224,7 +224,7 @@
                         <td>{{ $item->tahun_lulus }}</td>
                         <td>{{ $item->nama_perusahaan }}</td>
                         <td style="white-space: normal;">
-                            {{ $item->saran }}
+                            {{ $item->saran ?: '-' }}
                         </td>
                     </tr>
                 @empty
