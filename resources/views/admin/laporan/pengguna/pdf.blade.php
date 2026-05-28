@@ -146,7 +146,32 @@
 
 @endif
 
+@if($jenis == 'saran')
 
+<table width="100%" border="1" cellspacing="0" cellpadding="5">
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>Nama Alumni</th>
+            <th>Tahun Lulus</th>
+            <th>Perusahaan</th>
+            <th>Saran & Masukan</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($data as $item)
+        <tr>
+            <td>{{ $loop->iteration }}</td>
+            <td>{{ $item->nama }}</td>
+            <td>{{ $item->tahun_lulus }}</td>
+            <td>{{ $item->nama_perusahaan }}</td>
+            <td>{{ $item->saran }}</td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
+
+@endif
 
 </body>
 </html>

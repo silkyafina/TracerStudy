@@ -31,7 +31,7 @@ class LaporanPenggunaController extends Controller
 
         $result = $this->getData($request);
 
-        if ($jenis == 'jumlah') {
+        if ($jenis == 'jumlah' || $jenis == 'saran') {
             $data = $result;
         } else {
             $kompetensi = $result;
@@ -108,7 +108,20 @@ private function getData(Request $request)
                 return $row;
             });
     }
+    if ($jenis == 'saran') {
 
+        return (clone $base)
+            ->select(
+                'a.nama',
+                'a.tahun_lulus',
+                'usa.nama_perusahaan',
+                'usa.saran'
+            )
+            ->whereNotNull('usa.saran')
+            ->where('usa.saran', '!=', '')
+            ->orderByDesc('a.tahun_lulus')
+            ->get();
+    }
     // ======================
     // JENIS KOMPETENSI
     // ======================
@@ -171,6 +184,9 @@ public function exportPdf(Request $request)
 {
     $jenis = $request->jenis ?? 'jumlah';
 
+    // ======================
+    // JUMLAH
+    // ======================
     if ($jenis == 'jumlah') {
 
         $data = $this->getData($request);
@@ -179,8 +195,25 @@ public function exportPdf(Request $request)
             'jenis' => 'jumlah',
             'data' => $data
         ]);
+    }
 
-    } else {
+    // ======================
+    // SARAN
+    // ======================
+    elseif ($jenis == 'saran') {
+
+        $data = $this->getData($request);
+
+        $pdf = Pdf::loadView('admin.laporan.pengguna.pdf', [
+            'jenis' => 'saran',
+            'data' => $data
+        ]);
+    }
+
+    // ======================
+    // KOMPETENSI
+    // ======================
+    else {
 
         $kompetensi = $this->getData($request);
 

@@ -68,6 +68,7 @@
                             <option value="kompetensi" {{ request('jenis')=='kompetensi'?'selected':'' }}>
                                 Penilaian Kompetensi
                             </option>
+                            <option value="saran">Saran & Masukan</option>
                         </select>
                     </div>
 
@@ -124,7 +125,42 @@
             </table>
         </div>
         </div>
-    
+        @if($jenis == 'saran')
+
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Alumni</th>
+                        <th>Tahun Lulus</th>
+                        <th>Perusahaan</th>
+                        <th>Saran & Masukan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($data as $item)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $item->nama }}</td>
+                            <td>{{ $item->tahun_lulus }}</td>
+                            <td>{{ $item->nama_perusahaan }}</td>
+                            <td style="white-space: normal;">
+                                {{ $item->saran }}
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="5" class="text-center">
+                                Tidak ada data saran
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+        
+        @endif
 
     {{-- CHART JUMLAH --}}
     <div class="card shadow-sm">

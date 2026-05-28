@@ -29,7 +29,17 @@ class LaporanPenggunaExport implements FromCollection, WithHeadings
                 ];
             });
         }
+        if ($this->jenis == 'saran') {
 
+            return collect($this->data)->map(function ($row) {
+                return [
+                    $row->nama,
+                    $row->tahun_lulus,
+                    $row->nama_perusahaan,
+                    $row->saran
+                ];
+            });
+        }
         return collect([
             ['Integritas', $this->data->integritas],
             ['Keahlian', $this->data->keahlian],
@@ -43,7 +53,11 @@ class LaporanPenggunaExport implements FromCollection, WithHeadings
 
     public function headings(): array
     {
+        // ======================
+        // JUMLAH
+        // ======================
         if ($this->jenis == 'jumlah') {
+    
             return [
                 'Tahun Lulus',
                 'Jml Alumni Bekerja',
@@ -51,7 +65,26 @@ class LaporanPenggunaExport implements FromCollection, WithHeadings
                 'Persentase'
             ];
         }
-
-        return ['Kompetensi', 'Nilai'];
+    
+        // ======================
+        // SARAN
+        // ======================
+        if ($this->jenis == 'saran') {
+    
+            return [
+                'Nama Alumni',
+                'Tahun Lulus',
+                'Perusahaan',
+                'Saran & Masukan'
+            ];
+        }
+    
+        // ======================
+        // KOMPETENSI
+        // ======================
+        return [
+            'Kompetensi',
+            'Nilai'
+        ];
     }
 }
