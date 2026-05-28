@@ -204,7 +204,21 @@
 
     @endif
     @if($jenis == 'saran')
+    <div class="card shadow-sm mb-4">
 
+        <div class="card-header bg-cream text-white">
+            <div>
+                <a href="{{ route('admin.laporan.pengguna.excel', request()->all()) }}"
+                   class="btn btn-maroon">
+                   <i class="bi bi-file-excel"></i> Excel
+                </a>
+    
+                <a href="{{ route('admin.laporan.pengguna.pdf', request()->all()) }}"
+                   class="btn btn-maroon">
+                   <i class="bi bi-file-pdf"></i> PDF
+                </a>
+            </div>
+        </div>
     <div class="table-responsive">
         <table class="table table-bordered">
             <thead>
