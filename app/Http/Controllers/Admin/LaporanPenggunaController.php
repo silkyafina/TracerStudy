@@ -117,6 +117,8 @@ private function getData(Request $request)
                 'usa.nama_perusahaan',
                 'usa.saran'
             )
+            ->whereNotNull('usa.saran')
+            ->where('usa.saran', '!=', '')
             ->orderByDesc('a.tahun_lulus')
             ->get();
     }
