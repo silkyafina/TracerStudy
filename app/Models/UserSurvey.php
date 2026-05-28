@@ -2,6 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\Alumni;
+use App\Models\Prodi;
+use App\Models\UserSurveyAnswer;
+
 use Illuminate\Database\Eloquent\Model;
 
 class UserSurvey extends Model

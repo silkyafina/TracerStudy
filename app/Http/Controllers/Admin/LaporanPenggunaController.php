@@ -51,7 +51,14 @@ private function getData(Request $request)
     $jenis = $request->get('jenis', 'jumlah');
 
     $base = DB::table('alumni as a')
-        ->leftJoin('tracer_sessions as ts', 'ts.alumni_id', '=', 'a.id')
+    ->leftJoin('tracer_sessions as ts', function ($join) {
+        $join->on('ts.alumni_id', '=', 'a.id')
+             ->whereIn('ts.id', function ($q) {
+                 $q->select(DB::raw('MAX(id)'))
+                   ->from('tracer_sessions')
+                   ->groupBy('alumni_id');
+             });
+    })
         ->leftJoin('tracer_answers as ta', function ($join) {
             $join->on('ta.tracer_session_id', '=', 'ts.id')
                  ->where('ta.tracer_question_id', 9)
@@ -89,7 +96,7 @@ private function getData(Request $request)
             ->selectRaw('
                 a.tahun_lulus,
                 COUNT(DISTINCT CASE WHEN ta.value = 1 THEN a.id END) as alumni_bekerja,
-                COUNT(DISTINCT usa.id) as jml_responden
+                COUNT(DISTINCT us.alumni_id) as jml_responden
             ')
             ->groupBy('a.tahun_lulus')
             ->orderBy('a.tahun_lulus')
