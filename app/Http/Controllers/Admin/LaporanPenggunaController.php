@@ -83,7 +83,7 @@ private function getData(Request $request)
     if ($request->filled('cari')) {
         $base->where(function ($q) use ($request) {
             $q->where('usa.nama_perusahaan', 'like', '%'.$request->cari.'%')
-              ->orWhere('a.nama', 'like', '%'.$request->cari.'%');
+              ->orWhere('a.nama_lengkap', 'like', '%'.$request->cari.'%');
         });
     }
 
