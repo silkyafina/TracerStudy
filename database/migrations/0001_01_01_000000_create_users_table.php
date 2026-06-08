@@ -37,8 +37,7 @@ return new class extends Migration
             $table->enum('role', [
                 'alumni',
                 'admin',
-                'admin_prodi',
-                'staf'
+                'admin_prodi'
             ])->default('alumni');
 
             $table->rememberToken();

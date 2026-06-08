@@ -74,15 +74,22 @@
                     </div>
     
                     <div class="d-flex gap-2">
-    
+                        @if($isAdmin)
                         {{-- EDIT --}}
                         <a href="{{ route('admin.tracer.results.edit', $session->id) }}"
                            class="btn btn-sm btn-cream">
                             <i class="bi bi-pencil-square"></i>
                             Edit
                         </a>
-    
+                        @else
+                        <button class="btn btn-secondary btn-sm disabled-btn"
+                        data-bs-toggle="tooltip"
+                        title="Tidak memiliki akses Edit">
+                        <i class="bi bi-lock"></i>
+                        </button>
+                        @endif
                         {{-- DELETE --}}
+                    @if($isAdmin)
                         <form action="{{ route('admin.tracer.results.destroy', $session->id) }}"
                               method="POST"
                               onsubmit="return confirm('Yakin ingin menghapus tracer ini?')">
@@ -95,6 +102,13 @@
                                 Hapus
                             </button>
                         </form>
+                        @else
+                        <button class="btn btn-secondary btn-sm disabled-btn"
+                        data-bs-toggle="tooltip"
+                        title="Tidak memiliki akses Delete">
+                        <i class="bi bi-lock"></i>
+                        </button>
+                        @endif
     
                     </div>
     
