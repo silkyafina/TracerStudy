@@ -1,6 +1,6 @@
-# Tracer Studi Universitas Harkat
+# Tracer Study Universitas Harkat
 
-Sistem **Tracer Studi Universitas Harkat** merupakan aplikasi berbasis web yang digunakan untuk melakukan pendataan dan pelacakan alumni. Aplikasi ini membantu universitas dalam memperoleh informasi mengenai kondisi lulusan setelah menyelesaikan pendidikan, seperti status pekerjaan, studi lanjut, kesesuaian bidang pekerjaan, serta berbagai indikator lainnya yang dibutuhkan untuk akreditasi maupun evaluasi mutu pendidikan.
+Sistem **Tracer Study Universitas Harkat** merupakan aplikasi berbasis web yang digunakan untuk melakukan pendataan dan pelacakan alumni. Aplikasi ini membantu universitas dalam memperoleh informasi mengenai kondisi lulusan setelah menyelesaikan pendidikan, seperti status pekerjaan, studi lanjut, kesesuaian bidang pekerjaan, serta berbagai indikator lainnya yang dibutuhkan untuk akreditasi maupun evaluasi mutu pendidikan.
 
 ---
 
